@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DaXia.SQLServerDAL;
 
 namespace DaXia.BLL
 {
-    public class Base_bll<T> where T class
+    public class Base_bll<T>  where T : class
     {
+        private Base_dal dal;
+
+        public Base_dal DAL { get; set; }
+
         public T GetModel(int id)
         {
             return dal.GetModel<T>(id);
