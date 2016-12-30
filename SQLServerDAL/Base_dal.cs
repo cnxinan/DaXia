@@ -138,10 +138,14 @@ namespace DaXia.SQLServerDAL
             return false;
         }
 
-        #endregion
-                
+        #endregion                
 
         #region Page
+
+        public List<T> GetAllItems<T>(string sqlWhere)        
+        {
+            return db.Fetch<T>(sqlWhere);
+        }
 
         public List<T> Pages<T>(out long totalPage, out long totalItems,long page, long itemsPerPage, string sqlCondition, params object[] args)
         {

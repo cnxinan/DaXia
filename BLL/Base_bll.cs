@@ -41,7 +41,7 @@ namespace DaXia.BLL
         {
             totalPages = 1;
             totalItems = 1;
-            return dal.GetListPaging(strWhere, currentPage, itemsPerPage, out totalPages, out totalItems, objects);
+            return dal.Pages<T>(strWhere, currentPage, itemsPerPage, out totalPages, out totalItems, objects);
         }
     }
 }
