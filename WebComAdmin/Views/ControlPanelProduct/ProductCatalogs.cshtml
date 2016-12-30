@@ -1,0 +1,75 @@
+﻿@model KCPS.WebComAdmin.ProductCatalogListVM
+
+<!--内容-开始-->
+<div id="RightContainer">
+    <!--当前-开始-->
+    <div class="CtrlDiv">
+        <div class="left">
+            <b>产品管理</b> >> 栏目管理
+        </div>
+        <div class="right">
+            <a class="addBtn addDefault" href="/ControlPanelProduct/ProductCatalogAddEdit">添加类别</a>
+            <a href="javascript:;" onclick="location.replace(location.href);" class="refreshBtn refreshDefault" style="margin-right: 0px;">刷新本页</a>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+    <!--当前-结束-->
+    <!--筛选-开始-->
+    <div class="FilterDiv">
+        <table class="fTable" cellspacing="0">
+            <tr>                
+                <td>
+                    <input type="button" value="搜 索" id="SearchBtn" class="searchBtn searchDefault" onclick="Search()" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!--筛选-结束-->
+    <div class="DataDiv">
+        <div class="div100 m10">
+            <table class="dataTable" cellspacing="1">
+                <thead>
+                    <tr>
+                        <th style="width: 40px;">序号</th>
+                        <th style="width: 120px;">名称</th>
+                        <th style="width: 120px;">父栏目</th>
+                        <th style="width: 120px;">图片</th>
+                        <th style="width: 40px;">排序</th>
+                        <th style="width: 120px;">创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ var serialNo = 0; }
+                    @foreach (var item in Model.itemList)
+                    {
+                        serialNo++;
+                        <tr>
+                            <td>@serialNo</td>
+                            <td>@item.Name</td>
+                            <td>@item.ParName</td>
+                            <td><img width="100" height="50" src="@item.Image" /></td>
+                            <td>@item.Sort</td>
+                            <td>@item.CreationTime</td>
+                            <td>
+                                <a href="/ControlPanelProduct/ProductCatalogAddEdit?Id=@item.Id" class="AClass">修改</a>
+                                @*<a href="javascript:Lock('')" class="AClass">删除</a>*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @Html.Partial("PartialPaper", Model.page)
+        @*@Html.Partial("PartialPaper", Utility.pagedefault)*@
+    </div>
+</div>
+<!--内容-结束-->
+@section scripts
+{
+    <script type="text/javascript">
+        function Search() {
+
+        }        
+    </script>
+}

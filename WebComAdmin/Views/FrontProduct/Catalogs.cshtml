@@ -1,0 +1,83 @@
+﻿@{
+    Layout = null;
+}
+@model KCPS.WebComAdmin.Front.CatalogListVM
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>奖品分类</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+</head>
+<body onload="loaded()">
+    <!-- header -->
+    <header class="header">
+        <!-- search -->
+        <div class="header-search">
+            <input class="input-search" type="text" maxlength="20" autocomplete="off" name="" placeholder="3.8女神专场，火热来袭">
+            <a href="javascript:void(0);" class="icon-search"></a>
+        </div>
+        <!-- end search -->
+    </header>
+    <!-- end header -->
+    <!-- categorybody -->
+    <div class="categorybody">
+        <div id="rootListBox">
+            <div id="rootList">
+                <ul>
+                    <li class="current">推荐分类</li>
+                    @foreach(var item in Model.catalogNames)
+                    {
+                        <li>@item</li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div id="category-content">
+            <!-- 推荐分类 -->
+            @{int catalogIndex = 1;}
+            @foreach (var items in Model.catalogLists)
+            {
+                string strId = "fenlei"+catalogIndex.ToString();
+                
+                <div id="category-cont">
+                    <div id="@strId">
+                        <div>
+                            <ul class="clearfix">
+                                <li class="series">@items.titleName</li>
+                                @foreach(var item in items.itemList)
+                                { 
+                                <li>
+                                    <a href="/FrontProduct/CatalogDetails?id=@item.catalogId">
+                                        <img src="@item.image">@item.name
+                                    </a>
+                                </li>
+                                }                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }           
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!-- footer -->
+    @Html.Partial("_FrontBottom",1)
+    <!-- end footer -->
+    <!-- end categorybody -->
+    <script src="/Scripts/js/zepto.js"></script>
+    <script src="/Scripts/js/Mbase.js"></script>
+    <script src="/Scripts/js/iscroll.js"></script>
+    <script src="/Scripts/js/alllist.js"></script>
+</body>
+</html>

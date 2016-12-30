@@ -1,0 +1,116 @@
+﻿@model KCPS.WebComAdmin.AdInfoVM
+
+<!--内容-开始-->
+<div id="RightContainer">
+    <!--当前-开始-->
+    <div class="CtrlDiv">
+        <div class="left">
+            <b>系统管理</b>>>添加广告
+        </div>
+        <div class="right">
+            <a href="/ControlPanelSetting/ManageAds" class="backBtn backDefault" style="margin-right: 0px;">返回列表</a>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+    <!--当前-结束-->
+    <!--标签-开始-->
+
+    <div class="TabDiv">
+        <table class="tabTable" cellspacing="0">
+            <tr>
+                <td class="itemTD cur">广告信息</td>
+            </tr>
+        </table>
+    </div>
+    <!--标签-结束-->
+    <!--表单-开始-->
+    @using (Html.BeginForm("AdAddEdit", "ControlPanelSetting", FormMethod.Post, new { onsubmit = "return checkManage()" }))
+    {
+        @Html.HiddenFor(model => model.ID)
+        <div class="AddEditDiv">
+            <table class="addTable ItemTable" cellspacing="2">
+                <tr>
+                    <td class="ltd">广告名</td>
+                    <td class="rtd">
+                        @Html.TextBoxFor(model => model.AdName)
+                        <span class="f12 Red">* 必填</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ltd">跳转地址</td>
+                    <td class="rtd">
+                        @Html.TextBoxFor(model => model.AdUrl)
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ltd">展示图图</td>
+                    <td class="rtd">
+                        @Html.TextBoxFor(model => model.AdImage)
+                        <input type="button" id="image_bt" value="选择图片" />（网络图片 + 本地上传）
+                        <span class="f12 Red">* 必填</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ltd">排序</td>
+                    <td class="rtd">
+                        @Html.TextBoxFor(model => model.Sort)
+                        <span class="f12 Red">* 必填</span>
+                    </td>
+                </tr>
+            </table>
+            <table class="addTable" cellspacing="2">
+                <tr>
+                    <td class="ltd"></td>
+                    <td class="rtd">
+                        <input type="submit" class="submitBtn submitDefault" value="确 定" />
+                        <input type="reset" class="cancelBtn cancelDefault" value="重 置" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    }
+    <!--表单-结束-->
+</div>
+<!--内容-结束-->
+@section scripts
+{
+    <link rel="stylesheet" href="/Scripts/kindeditor-4.1.10/themes/default/default.css" />
+    <link rel="stylesheet" href="/Scripts/kindeditor-4.1.10/plugins/code/prettify.css" />
+    <script charset="utf-8" src="/Scripts/kindeditor-4.1.10/kindeditor.js"></script>
+    <script charset="utf-8" src="/Scripts/kindeditor-4.1.10/lang/zh_CN.js"></script>
+    <script charset="utf-8" src="/Scripts/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+
+    <script type="text/javascript">
+
+        @Html.Raw(ViewBag.JS)
+
+        KindEditor.ready(function (K) {           
+
+            //正面图片
+            var img = K.editor({
+                allowFileManager: true,
+                cssPath: '/Scripts/kindeditor-4.1.10/plugins/code/prettify.css',
+                uploadJson: '/Scripts/kindeditor-4.1.10/asp.net/upload_json.ashx',
+                fileManagerJson: '/Scripts/kindeditor-4.1.10/asp.net/file_manager_json.ashx'
+            });
+            //正面图片
+            K('#image_bt').click(function () {
+                img.loadPlugin('image', function () {
+                    img.plugin.imageDialog({
+                        imageUrl: K('#AdImage').val(),
+                        clickFn: function (url, title, width, height, border, align) {
+                            K('#AdImage').val(url);
+                            img.hideDialog();
+                        }
+                    });
+                });
+            });
+        });
+
+        function checkManage() {
+            showWorking();
+            return true;
+        }
+    </script>
+}

@@ -1,0 +1,102 @@
+﻿@{
+    Layout = null;    
+}
+@model KCPS.WebComAdmin.Front.ProductDetialVM
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>产品详情</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+</head>
+<body>
+    <!-- viewport -->
+    <div class="viewport">
+        <!-- headerTop -->
+        <div class="headerTop">
+            <a href="javascript:history.go(-1);"><span class="return">返回</span></a>产品详情
+        </div>
+        <!-- end headerTop -->
+        <!-- product -->
+        <div class="product">
+            <ul class="productUl clearfix">
+                <li class="active">@Model.processNumStr</li>
+                @*<li>第20期</li>
+                <li>第19期</li>
+                <li>第18期</li>*@
+            </ul>
+            <div class="productCont">
+                <div class="productContent" style="display:block">
+                    <div class="productImg productSliderOne">
+                        <div><a href=""><img src="@Model.productIamge"></a></div>
+                        @*<div><a href=""><img src="/images/product-img.jpg"></a></div>
+                        <div><a href=""><img src="/images/product-img.jpg"></a></div>*@
+                    </div>
+                    <div class="boxProduct productSum">
+                        <p><span>@Model.status</span>@Model.productName <span>￥ @Model.marketPrice</span></p>
+                        <div class="number">
+                            <div class="strip"><span class="strip-color" style="width:@Model.processedPercent;"></span></div>
+                            <span class="textleft">已参与：@Model.haveActNumbers</span>
+                            <span>总需人次：@Model.actNumbers</span>
+                            <span class="textright">剩余：@Model.remainActNumbers</span>
+                        </div>
+                    </div>
+                    <div class="productText clearfix">
+                        <div class="bj"><img src="/images/icon-bj.png"></div>
+                        <div class="productTextLogo">
+                            <a href="/FrontHome/PeopleRewardRecord?openId=@Model.championOpenId"><img src="@Model.championHeadImage"></a>
+                       </div>
+                        <p><b>@Model.championName</b>（@Model.championCity）<i>共夺宝: <b>@Model.rewardTimes 次</b></i></p>
+                        <p>摇奖时间：@Model.championDate</p>
+                        <p>幸运代码: <b>@Model.championNo</b></p>
+                    </div>
+                    <div class="productText">
+                        <a href="/FrontProduct/ProductContent?id=@Model.productId">图文详情<span></span></a>
+                    </div>
+                    <div class="productText">
+                        <a href="/FrontProduct/Ranking?id=@Model.productId&score=-1">夺宝记录<span></span></a>
+                    </div>
+                </div>                
+            </div>
+        </div>
+        <!-- end product -->
+    </div>
+    <!-- cart -->
+    <div class="mycart">
+        <a href="javascript:;"><span></span>收藏</a>
+        <button class="redColor" onclick="shack('@Model.productId')">立即夺宝</button>
+        <button class="pinkColor" onclick="buy('@Model.productId')">立即购买</button>
+    </div>
+    <!-- end cart -->
+    <!-- footer -->
+    @Html.Partial("_FrontBottom", 1)
+    <!-- end footer -->
+    <!-- end viewport -->
+    <script src="/Scripts/js/zepto.js"></script>
+    <script src="/Scripts/js/gmu.js"></script>
+    <script src="/Scripts/js/slide-touch.js"></script>
+    <script type="text/javascript">
+
+        function Love(productId){
+         //ajax 加入收藏   
+        }
+        
+        function shack(productId){
+            location.href = "/FrontProduct/Shack?id="+productId;
+        }
+
+        function buy(productId) {
+            location.href = "/FrontProduct/Payment?productId=" + productId;
+        }
+    </script>
+</body>
+</html>

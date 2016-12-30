@@ -1,0 +1,100 @@
+﻿@{
+    Layout = null;
+}
+@model KCPS.WebComAdmin.Front.MyOrderListVM
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的订单</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <m   eta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+</head>
+<body>
+    <!-- viewport -->
+    <div class="viewport">
+        <div class="viewport">
+            <div class="personalCenter">
+                <div class="withdrawalsOne clearfix">
+                    <div class="withdrawalsLogo"><img src="@Model.headImg" /></div>
+                    <p>昵称：@Model.nickName</p>
+                    <p>经验值：@Model.userNo</p>
+                    @*<p>等级：将军</p>*@
+                    <ul class="myPerCen clearfix">
+                        <li class="active"><a href="javascript:;"><i>（有 @Model.waitForSentNum 件）</i>待发货</a></li>
+                        <li><a href="javascript:;">已发货</a></li>
+                    </ul>
+                </div>
+                <!-- myPersonalCenter -->
+                <div class="myPersonalCenter">
+                    <div class="myPerCenCont" style="display:block;">
+                        @foreach (var item in Model.WaitForSendList)
+                        {
+                            string url = "/FrontPerson/OrderDetail?Id=" + item.orderId;
+                            if (item.productCount > 0)
+                            {
+                                url = "/FrontPerson/BuyOrderDetail?Id=" + item.orderId;
+                            }
+                            <div class="newsAnnounced clearfix">
+                                <a href="@url">
+                                    <div class="imgLeft"><img src="@item.productImg" /></div>
+                                    <div class="imgRight">
+                                        <p>@item.productName</p>
+                                        <p><span class="redColor">单价￥:@item.productPrice</span></p>
+                                        @if (item.productCount > 0)
+                                        {
+                                            <p>数量：@item.productCount</p>
+                                        }
+                                        <p>获得者：@item.gotUserName</p>
+                                        <p>揭晓时间：@item.gotDate</p>
+                                        <p>操作：<a href="@url" style="color:#66CCFF">详细</a></p>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                    </div>
+                    <div class="myPerCenCont">
+                        @foreach (var item in Model.SentList)
+                        {
+                            string url = "/FrontPerson/OrderDetail?Id=" + item.orderId;
+                            if (item.productCount > 0)
+                            {
+                                url = "/FrontPerson/BuyOrderDetail?Id=" + item.orderId;
+                            }
+                            <div class="newsAnnounced clearfix">
+                                <a href="@url">
+                                    <div class="imgLeft"><img src="@item.productImg" /></div>
+                                    <div class="imgRight">
+                                        <p>@item.productName</p>
+                                        <p><span class="redColor">单价￥:@item.productPrice</span></p>
+                                        @if (item.productCount > 0)
+                                        {
+                                            <p>数量：@item.productCount</p>
+                                        }
+                                        <p>获得者：@item.gotUserName</p>
+                                        <p>揭晓时间：@item.gotDate</p>
+                                        <p>操作：<a href="@url" style="color:#66CCFF">详细</a></p>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_ShopFooter", 2)
+    <script src="/Scripts/js/zepto.js"></script>
+    <script src="/Scripts/js/gmu.js"></script>
+    <script src="/Scripts/js/slide-touch.js"></script>
+    <!-- end viewport -->
+</body>
+</html>

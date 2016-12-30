@@ -1,0 +1,120 @@
+﻿@*@model KCPS.WebComAdmin.MemberListVM*@
+@using KCPS.WebFrameWork
+
+<!--内容-开始-->
+<div id="RightContainer">
+    <!--当前-开始-->
+    <div class="CtrlDiv">
+        <div class="left"><b>财务管理</b> >> 购物币提货</div>
+        <div class="right">
+            <a href="javascript:;" onclick="location.replace(location.href);" class="refreshBtn refreshDefault" style="margin-right: 0px;">刷新本页</a>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+    <!--当前-结束-->
+    <!--筛选-开始-->
+    <div class="FilterDiv">
+        <table class="fTable" cellspacing="0">
+            <tr>
+                <td class="itemTD">会员编号：</td>
+                <td class="itemSP">
+                    @Html.TextBox("memberNo", Request.QueryString.Get<string>("memberNo"), new { maxlength = "8" })
+                    <span class="selectBox-arrow"></span>
+                </td>                
+                <td>
+                    <input type="button" value="搜 索" id="SearchBtn" class="searchBtn searchDefault" onclick="Search()" />
+                </td> 
+            </tr>
+        </table>
+    </div>
+    <!--筛选-结束-->
+    <div class="DataDiv">
+        <div class="div100 m10">
+            <table class="dataTable" cellspacing="1">
+                <thead>
+                    <tr>
+                        <th style="width: 40px;">序号</th>
+                        <th style="width: 60px;">会员编号</th>
+                        <th style="width: 40px;">姓名</th>
+                        <th style="width: 40px;">提货金额</th>                        
+                        <th style="width: 60px;">提货前购物币余额</th>                        
+                        <th style="width: 60px;">提货后购物币余额</th>                        
+                        <th style="width: 100px;">提交时间</th>
+                        <th style="width: 100px;">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><a href="javascript:;" class="AClass" title="进用户后台">89778776</a></td>
+                        <td>李永进</td>
+                        <td>1000元</td>
+                        <td>3000元</td>
+                        <td>2000元</td>
+                        <td>2015-09-12 18:47:15</td>
+                        <td>
+                            <a href="javascript:;" class="AClass">审核</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td><a href="javascript:;" class="AClass" title="进用户后台">89778776</a></td>
+                        <td>刘老媪</td>
+                        <td>10000元</td>
+                        <td>30000元</td>
+                        <td>20000元</td>
+                        <td>2015-09-12 18:47:15</td>
+                        <td>
+                            已审核
+                        </td>
+                    </tr>
+                    @* @{int serialNo = 0;}
+                    @foreach (var manager in Model.memberList)
+                    {
+                        serialNo++;
+                        string netType = Utility.GetEnumDescription<SaleNetType>((SaleNetType)manager.);
+                        string discType = Utility.GetEnumDescription<SaleDiscType>((SaleNetType)manager.UserStatus);
+                        <tr>
+                            <td>@serialNo</td>
+                            <td>@manager.UserName</td>
+                            <td>@manager.RealName</td>
+                            <td>@manager.Mobile</td>
+                            <td>@manager.Tel</td>
+                            <td>@userType</td>
+                            <td>@userStatus</td>
+                            <td>@manager.CreatorName</td>
+                            <td>
+                            </td>
+                            <td>
+                                <a href="javascript:EditFile('客户信息','@manager.')" class="AClass">查看</a>
+                                <a href="javascript:Lock('@manager.ID')" class="AClass">禁用</a>
+                                <a href="javascript:UnLock('@manager.')" class="AClass">删除</a>                                
+                            </td>
+                        </tr>           
+                    }*@
+                </tbody>
+            </table>
+        </div>
+        @Html.Partial("PartialPaper", Utility.pagedefault)
+    </div>
+</div>
+<!--内容-结束-->
+@section scripts
+{
+    <script type="text/javascript">
+        //搜索
+        function Search() {
+        }
+
+        //禁用/启用管理
+        function loclOrUnlock() {
+        }
+
+        //删除管理
+        function deleteUser() {
+
+        }
+    </script>
+}
+
+

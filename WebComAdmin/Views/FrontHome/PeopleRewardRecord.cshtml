@@ -1,0 +1,101 @@
+﻿@{
+    Layout = null;
+}
+@model KCPS.WebComAdmin.Front.RewardRecordListVM
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户信息</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+</head>
+<body>
+    <!-- viewport -->
+    <div class="viewport">
+        <div class="personalCenter">
+            <div class="withdrawalsOne clearfix">
+                <div class="withdrawalsLogo"><img src="@Model.memberEntity.headimgurl"></div>
+                <p>昵称：@Model.memberEntity.nickname</p>
+                @*<p>经验值：123456</a></p>
+                <p>等级：将军</p>*@
+                <ul class="myPerCen clearfix">
+                    <li class="active"><a href="javascript:;">一元夺宝记录</a></li>
+                    <li><a href="javascript:;">获得商品</a></li>
+                </ul>
+            </div>
+            <!-- myPersonalCenter -->
+            <div class="myPersonalCenter">
+                <div class="myPerCenCont" style="display:block;">
+                    @foreach (var item in Model.ProcessingList)
+                    {
+                        <div class="newsAnnounced clearfix">
+                            <a href="">
+                                <div class="section seckill clearfix">
+                                    <div class="bgimg">
+                                        <a href="/FrontProduct/Product?id=@item.productId">
+                                            <img src="@item.productImg" />
+                                        </a>
+                                        <span class="seckill"><img src="images/icon-seckill.png"></span>
+                                        <div class="number">
+                                            <div class="strip">
+                                                <span class="strip-color" style="width:@item.processedPercent;"></span>
+                                            </div>
+                                            <span class="textleft">已参与：@item.haveActNumbers</span>
+                                            <span>总需人次：@item.actNumbers</span>
+                                            <span class="textright">剩余：@item.remainActNumbers</span>
+                                        </div>
+                                    </div>
+                                    <p class="titleText">
+                                        <a href="/FrontProduct/Product?id=@item.productId">@item.productName</a>
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+                <div class="myPerCenCont">
+                    <div class="newsAnnounced clearfix">
+                        @foreach (var item in Model.HaveDoneList)
+                        {
+                            <div class="newsAnnounced clearfix">
+
+                                <div class="imgLeft">
+                                    <a href="/FrontProduct/Product?id=@item.productId">
+                                        <img src="@item.productImg">
+                                    </a>
+                                </div>
+                                <div class="imgRight">
+                                    <p>（@item.processStr）@item.productName</p>
+                                    <p><span class="redColor">￥:@item.marketPrice</span></p>
+                                    <p>
+                                        获得者：
+                                        <a href="/FrontPerson/RewardRecords?openId=@item.openId" style="color: #66CCFF;">@item.userName</a>
+                                    </p>
+                                    <p>揭晓时间：@item.rewardDate</p>                                    
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- end viewport -->
+    <!-- footer -->
+    @Html.Partial("_FrontBottom", 1)
+    <!-- end footer -->
+    <script src="/Scripts/js/zepto.js"></script>
+    <script src="/Scripts/js/gmu.js"></script>
+    <script src="/Scripts/js/slide-touch.js"></script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+﻿@{
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>支付结果</title>
+    <meta content="app-id=518966501" name="apple-itunes-app" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no, maximum-scale=1.0" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="CMBNETPAYMENT" content="China Merchants Bank">
+
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+    <style>
+        input[type="checkbox"]:checked {
+            background: #e64859;
+            border: solid 1px #e64859;
+            color: #fff;
+        }
+
+        .g-pay-auto {
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .z-pay-tips {
+            text-align: left;
+            margin: 20px auto;
+            display: inline-block;
+        }
+
+            .z-pay-tips em {
+                display: block;
+                font-size: 16px;
+                margin-bottom: 5px;
+            }
+
+        body, button, input, select, textarea {
+            font-size: 12px;
+            font-family: arial,微软雅黑;
+        }
+
+
+        a.gray6, .gray6 {
+            color: #666;
+        }
+
+        a.grayc, .grayc {
+            color: #CCC;
+        }
+
+
+        .u-Btn {
+            color: #fff;
+            text-align: center;
+            font-size: 14px;
+            display: box;
+            display: -webkit-box;
+            display: -moz-box;
+        }
+
+            .u-Btn .u-Btn-li {
+                font-size: 18px;
+                -webkit-box-flex: 1;
+                -moz-box-flex: 1;
+                box-flex: 1;
+                text-align: center;
+            }
+
+        a.z-CloseBtn, a.z-DefineBtn, a.z-ShoppingBtn, a.z-cartBtn {
+            line-height: 44px;
+            text-align: center;
+            display: block;
+            border-radius: 3px;
+        }
+
+        .u-Btn a.z-CloseBtn {
+            color: #585858;
+            font-size: 14px;
+            line-height: 33px;
+            border: 1px solid #DDD;
+            margin-right: 10px;
+            background: #fff;
+            box-shadow: 1px 1px 1px #F3F3F3;
+        }
+
+        .u-Btn a.z-DefineBtn {
+            color: #fff;
+            font-size: 14px;
+            line-height: 33px;
+            border: 1px solid #FE6D0B;
+            box-shadow: 0 1px 2px #E7E7E7;
+            background: #e64859;
+        }
+
+        .u-Btn a.z-ShoppingBtn {
+            border: 1px solid #f60;
+            font-size: 14px;
+            line-height: 33px;
+            margin-right: 10px;
+            box-shadow: 0 1px 1px #E7E7E7;
+            background: #FF6500;
+            color: #fff;
+        }
+
+        .u-Btn a.z-cartBtn {
+            color: #fff;
+            font-size: 14px;
+            line-height: 33px;
+            border: 1px solid #FEA700;
+            box-shadow: 0 1px 2px #E7E7E7;
+            background: #FFB321;
+        }
+
+        .footer1 {
+            text-align: center;
+            position: relative;
+            padding-bottom: 65px;
+        }
+
+            .footer1 .z-top {
+                width: 40px;
+                height: 40px;
+                display: inline-block;
+                position: fixed;
+                right: 5px;
+                bottom: 61px;
+                background: rgba(0,0,0,0.2);
+                border-radius: 3px;
+            }
+
+                .footer1 .z-top .z-arrow {
+                    width: 10px;
+                    height: 10px;
+                    margin-top: 17px;
+                    margin-right: 1px;
+                    margin-left: 2px;
+                    border-color: #fff;
+                    border-width: 2px 0 0 2px;
+                }
+
+            .footer1 a {
+                color: #999;
+            }
+
+            .footer1 .m-ftA {
+                padding-top: 5px;
+            }
+
+                .footer1 .m-ftA a {
+                    padding: 8px 15px;
+                    display: inline-block;
+                }
+
+            .footer1 p.grayc span {
+                margin-left: 3px;
+                margin-right: 8px;
+            }
+
+            .footer1 .u-ft-nav {
+                width: 100%;
+                border-top: 1px solid #ddd;
+                border-bottom: 1px solid #ddd;
+                margin: 0 auto;
+                background: #fafafa;
+                display: box;
+                display: -webkit-box;
+                display: -moz-box;
+            }
+
+                .footer1 .u-ft-nav span {
+                    height: 30px;
+                    line-height: 30px;
+                    -webkit-box-flex: 1;
+                    -moz-box-flex: 1;
+                    box-flex: 1;
+                    display: block;
+                    position: relative;
+                }
+    </style>
+</head>
+
+
+
+<body>
+    <div class="h5-1yyg-v1">
+
+        <!-- 栏目页面顶部 -->
+
+
+        <input name="hidShopID" type="hidden" id="hidShopID" value="131118151938166319">
+        <section id="shopResultBox" class="clearfix g-pay-success">
+            <div class="g-pay-auto">
+                <div class="z-pay-tips"><s></s><b><em class="gray6">  <input type="checkbox" name="checkbox" checked>恭喜您,支付成功！</em></b></div>
+
+            </div>
+            <div class="u-Btn">
+                <div class="u-Btn-li"><a href="/FrontHome/Index" class="z-CloseBtn">返回首页</a></div>
+                <div class="u-Btn-li"><a href="/FrontPerson/Index" class="z-DefineBtn">查看余额</a></div>
+            </div>
+        </section>
+    </div>
+
+    ﻿<footer class="footer1">
+        <div class="u-ft-nav" id="fLoginInfo">
+            <span><a href="tel:029 8110 0973">客服热线</a><b></b></span>
+            <span><a href="">新手指南</a><b></b></span>
+        </div>
+
+        <p></p>
+        <p class="m-ftA grayc">Copyright 2015-2016 时尚BOSS 版权所有</p>
+        <a id="btnTop" href="javascript:;" class="z-top" style="display:none;"><b class="z-arrow"></b></a>
+        <!--APP导航开始-->
+
+    </footer>
+
+    <!-- footer -->
+    @Html.Partial("_FrontBottom", 4)
+    <!-- end footer -->
+    <!-- end viewport -->
+    <script src="/Scripts/js/zepto.js"></script>
+    <script src="/Scripts/js/gmu.js"></script>
+    <script src="/Scripts/js/slide-touch.js"></script>
+</body>
+</html>
+

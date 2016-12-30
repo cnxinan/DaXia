@@ -1,0 +1,75 @@
+﻿@model KCPS.WebComAdmin.ManageAdminVM
+@using KCPS.WebFrameWork
+
+<!--内容-开始-->
+<div id="RightContainer">
+    <!--当前-开始-->
+    <div class="CtrlDiv">
+        <div class="left"><b>系统管理</b> >> 公告管理</div>
+        <div class="right">
+            <a class="addBtn addDefault" href="@SiteUrls.Instance.M_ManageAddAndEdit()">添加公告</a>
+            <a href="javascript:;" onclick="location.replace(location.href);" class="refreshBtn refreshDefault" style="margin-right: 0px;">刷新本页</a>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+    <!--当前-结束-->
+    <!--筛选-开始-->
+    <div class="FilterDiv">
+        <table class="fTable" cellspacing="0">
+            <tr>                
+                <td>
+                    <input type="button" value="搜 索" id="SearchBtn" class="searchBtn searchDefault" onclick="Search()" />
+                </td>               
+            </tr>            
+        </table>        
+    </div>
+    <!--筛选-结束-->
+    <div class="DataDiv">
+        <div class="div100 m10">
+            <table class="dataTable" cellspacing="1">
+                <thead>
+                    <tr>
+                        <th style="width: 40px;">序号</th>
+                        <th style="width: 60px;">标题</th>
+                        <th style="width: 40px;">内容</th>                       
+                        <th style="width: 70px;">添加人</th>
+                        <th style="width: 100px;">添加时间</th>
+                        <th style="width: 80px;">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <tr>
+                       <td>1</td>
+                       <td>12.29日暂停服务通知</td>
+                       <td>本公司将于12.29日放假，特此通知</td>
+                       <td>魏西安</td>
+                       <td>2015-09-12 18:47:15</td>
+                       <td>
+                           <a class="AClass">查看</a>
+                           <a class="AClass">删除</a> 
+                       </td>
+                   </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--内容-结束-->
+@section scripts
+{
+    <script type="text/javascript">
+        //搜索
+        function Search() {
+        }
+
+        //禁用/启用管理
+        function loclOrUnlock() {
+        }
+
+        //删除管理
+        function deleteUser() {
+
+        }
+    </script>
+    }
+

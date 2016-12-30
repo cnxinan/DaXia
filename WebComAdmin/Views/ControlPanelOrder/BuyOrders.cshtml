@@ -1,0 +1,122 @@
+﻿@model KCPS.WebComAdmin.BuyOrderListVM
+
+<!--内容-开始-->
+<div id="RightContainer">
+    <!--当前-开始-->
+    <div class="CtrlDiv">
+        <div class="left"><b>产品管理</b> >> 购物订单</div>
+        <div class="right">
+            <a href="javascript:;" onclick="location.replace(location.href);" class="refreshBtn refreshDefault" style="margin-right: 0px;">刷新本页</a>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+    <!--当前-结束-->
+    <!--筛选-开始-->
+    <div class="FilterDiv">
+        <table class="fTable" cellspacing="0">
+            <tr>
+                <td class="itemTD">订单编号：</td>
+                <td class="itemSP">
+                    <input name="orderNo" id="orderNo" type="text" class="smalltxt" onkeydown="if(event.keyCode==13){document.getElementById('SearchBtn').click();return false;}" />
+                </td>
+                <td>
+                    <input type="button" value="搜 索" id="SearchBtn" class="searchBtn searchDefault" onclick="Search()" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!--筛选-结束-->
+    <div class="DataDiv">
+        <div class="div100 m10">
+            <table class="dataTable" cellspacing="1">
+                <thead>
+                    <tr>
+                        <th style="width: 40px;">序号</th>
+                        <th style="width: 80px;">订单编号</th>
+                        <th style="width: 200px;">OpenId</th>
+                        <th style="width: 200px;">产品名称</th>
+                        <th style="width: 40px;">购买数量</th>
+                        <th style="width: 60px;">订单金额</th>
+                        <th style="width: 40px;">状态</th>
+                        <th style="width: 200px;">发货地址</th>
+                        <th style="width: 80px;">接受人</th>
+                        <th style="width: 80px;">联系手机</th>
+                        <th style="width: 150px;">下单时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int serialNo = 0;}
+                    @foreach (var item in Model.itemList)
+                    {
+                        serialNo++;
+                        <tr>
+                            <td>@serialNo</td>
+                            <td>@item.orderNo</td>
+                            <td>@item.openId</td>
+                            <td>@item.productName</td>
+                            <td>@item.count</td>
+                            <td>@item.amount</td>
+                            <td>
+                                @if (item.status == 0)
+                                {
+                                    @:未支付
+                            }
+                                else if (item.status == 1)
+                                {
+                                    @:已支付
+                            }
+                                else if (item.status == 2)
+                                {
+                                    @:已发货
+                            }
+                            </td>
+                            <td>@item.address</td>
+                            <td>@item.receiver</td>
+                            <td>@item.mobile</td>
+                            <td>@item.creationDate</td>
+                            <td>
+                                @if (item.status == 0)
+                                {
+                                    <a class="AClass" href="javascript:changeStatusTo('@item.ID',1)">设为已支付</a>
+                                }
+                                else if (item.status == 1)
+                                {
+                                    <a class="AClass" href="javascript:changeStatusTo('@item.ID',2)">发货</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        @Html.Partial("PartialPaper", Model.page)
+        @*@Html.Partial("PartialPaper", Utility.pagedefault)*@
+    </div>
+</div>
+<!--内容-结束-->
+@section scripts
+{
+    <script type="text/javascript">
+        function Search() {
+            var orderNo = $('#orderNo').val();
+            location.href = '/ControlPanelOrder/BuyOrders?orderNo=' + orderNo;
+        }
+
+        function changeStatusTo(id, status) {
+            $.ajax({
+                type: "POST",
+                url: "/ControlPanelOrder/_AjaxChangeStatus",
+                data: { id: id },
+                success: function (data) {
+                    alert(data);
+                    location.reload();
+                }
+            });
+        }
+    </script>
+}
+
+
+

@@ -1,0 +1,119 @@
+﻿@model KCPS.WebComAdmin.ProductListVM
+
+<!--内容-开始-->
+<div id="RightContainer">
+    <!--当前-开始-->
+    <div class="CtrlDiv">
+        <div class="left"><b>产品管理</b> >> 产品管理</div>
+        <div class="right">
+            <a class="addBtn addDefault" href="/ControlPanelProduct/ProductAddEdit">添加产品</a>
+            <a href="javascript:;" onclick="location.replace(location.href);" class="refreshBtn refreshDefault" style="margin-right: 0px;">刷新本页</a>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+    <!--当前-结束-->
+    <!--筛选-开始-->
+    <div class="FilterDiv">
+        <table class="fTable" cellspacing="0">
+            <tr>
+                <td class="itemTD">产品名：</td>
+                <td class="itemSP">
+                    <input name="productName" id="productName" type="text" class="smalltxt" onkeydown="if(event.keyCode==13){document.getElementById('SearchBtn').click();return false;}" />
+                </td>                
+                <td>
+                    <input type="button" value="搜 索" id="SearchBtn" class="searchBtn searchDefault" onclick="Search()" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!--筛选-结束-->
+    <div class="DataDiv">
+        <div class="div100 m10">
+            <table class="dataTable" cellspacing="1">
+                <thead>
+                    <tr>
+                        <th style="width: 40px;">序号</th>
+                        <th style="width: 40px;">类别</th>
+                        <th style="width: 120px;">名称</th>
+                        <th style="width: 120px;">封面</th>
+                        <th style="width: 40px;">市场价</th>
+                        <th style="width: 40px;">进货价</th>
+                        <th style="width: 40px;">排序</th>
+                        <th style="width: 40px;">多图</th>
+                        <th style="width: 120px;">创建时间</th>
+                        <th style="width: 120px;">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int serialNo = 0;}
+                    @foreach (var item in Model.itemList)
+                    {
+                        serialNo++;
+                        <tr>
+                            <td>@serialNo</td>
+                            <td>@item.TypeName</td>
+                            <td>@item.Name</td>
+                            <td><img src="@item.Image" width="50" height="50" /></td>
+                            <td>@item.MarketPrice</td>
+                            <td>@item.StockPrice</td>
+                            <td>@item.Sort</td>
+                            <td><a class="AClass" href="/ControlPanelProduct/ProductImgs?id=@item.Id">查看</a></td>
+                            <td>@item.CreationTime</td>
+                            <td>
+                                <a href="/ControlPanelProduct/ProductAddEdit?Id=@item.Id" class="AClass">修改</a>
+                                @if (@item.SerianNo != "1")
+                                {
+                                    <a href="javascript:Disable('@item.Id','1')" class="AClass">下架</a>
+                                }
+                                else
+                                {
+                                    <a href="javascript:Disable('@item.Id','0')" class="AClass">上架</a>
+                                }                                
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @Html.Partial("PartialPaper", Model.page)
+        @*@Html.Partial("PartialPaper", Utility.pagedefault)*@
+    </div>
+</div>
+<!--内容-结束-->
+@section scripts
+{
+    <script type="text/javascript">
+        function Search() {
+            var productName = $('#productName').val();
+            location.href = '/ControlPanelProduct/Products?productName=' + productName;
+        }
+
+        function Disable(id, num) {
+            $.ajax({
+                type: "POST",
+                url: "/ControlPanelProduct/_ajaxDisable",
+                data: { id: id, num: num },
+                success: function (data) {
+                    alert(data);
+                    location.reload();
+                }
+            });
+        }
+
+        function Start(id) {
+            $.ajax({
+                type: "POST",
+                url: "/ControlPanelProduct/_ajaxStartShack",
+                data: { id: id },
+                success: function (data) {
+                    alert(data);
+                    location.reload();
+                }
+            });
+        }      
+
+    </script>
+}
+
+
+

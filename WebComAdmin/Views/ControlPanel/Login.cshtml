@@ -1,0 +1,80 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=10" />
+    <title>客户资源管理系统</title>
+    <link href="/css/skin1/global.css" rel="stylesheet" type="text/css" />
+    <link href="/css/skin1/login.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/scripts/easydialog/easydialog.css" />
+    <script type="text/javascript" src="/scripts/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="/scripts/MyScripts/show.js"></script>
+    <script type="text/javascript" src="/scripts/MyScripts/fun.js"></script>
+    <script type="text/javascript" src="/scripts/easydialog/easydialog.js"></script>
+    <script type="text/javascript">
+        @Html.Raw(ViewBag.JS)
+
+        function LoginCheck() {
+            if ($("#UserName").val() == "") {
+                AlertDialog("请输入用户名！");
+                return false;
+            }
+            if ($("#UserPassword").val() == "") {
+                AlertDialog("请输入您的密码！");
+                return false;
+            }
+            return true;
+        }
+
+    </script>
+</head>
+<body>
+    <div id="LoginDiv" style="background-image: url(/images/skin1/login_bg_2.jpg)">
+        <div class="d1">
+            <table class="t1" cellspacing="0">
+                <tr>
+                    <td class="tdl">
+                        @*<img src="/images/logo21.png" />*@
+                    </td>
+                    <td class="tdr">建议您使用Webkit核心浏览器,如360急速浏览器<a href="http://chrome.360.cn/?src=navi" target="_blank" class="Blue Underline chrome">下载360急速浏览器</a></td>
+                </tr>
+            </table>
+        </div>
+        <div class="d2">
+            <div class="k1">
+                <div class="bg"></div>
+                <div class="nr">
+                    <div class="title">用户登录</div>
+                    <div class="cont">
+                        <form action="/ControlPanel/Login" method="post">
+                            <p class="m5">用户名</p>
+                            <p class="m10">
+                                <input name="UserName" type="text" maxlength="50" id="UserName" class="formtext" value="SuperAdmin" />
+                            </p>
+                            <p class="m5">密码</p>
+                            <p class="m20">
+                                <input name="UserPassword" maxlength="50" id="UserPassword" class="formtext" onfocus="this.type='password'" value="123123123" />
+                            </p>
+                            <p class="m20">
+                                <input type="submit" name="LoginBtn" value="" onclick="return LoginCheck();" id="LoginBtn" class="loginBtn" />
+                            </p>
+                            <p class="White">
+                                请不要在公共场合登录本系统<br />
+                                注意保管好您的密码！
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d3">
+            <p class="t3">&copy; 2016-2020&nbsp;&nbsp;摇一摇管理系统</p>
+        </div>
+    </div>
+</body>
+</html>

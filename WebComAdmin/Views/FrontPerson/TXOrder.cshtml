@@ -1,0 +1,56 @@
+﻿@{
+    Layout = null;
+}
+@model KCPS.WebComAdmin.Front.TXOrderListVM
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>提现订单</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+</head>
+<body>
+    <!-- viewport -->
+    <div class="viewport">
+        <div class="personalCenter">
+            <div class="withdrawalsOne clearfix">
+                <div class="withdrawalsLogo"><img src="@Model.headImg"></div>
+                <p>昵称：@Model.nickName</p>
+                <p>会员：是@*<a href="">（点击链接成为会员）</a>*@</p>
+                <p>会员ID：@Model.userNo</p>
+                @*<p>积分：0</p>*@
+                <span><a href="">帐号设置</a></span>
+                @*<p>关注时间：2016-03-02</p>*@
+            </div>
+            <div class="joinTop">
+                <p>提现信息</p>
+                <p><a href="/FrontPerson/TX">我要提现</a></p>
+            </div>
+            <div class="withdrawalsOneCont">
+                <ul class="clearfix">
+                    <li>编　号</li>
+                    <li>金　额</li>
+                    <li>状　态</li>
+                    @foreach (var item in Model.itemList)
+                    {
+                        <li>@item.orderNo</li>
+                        <li><b>￥@item.amount</b></li>
+                        <li>@item.status</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_ShopFooter", 4)
+    <!-- end viewport -->
+</body>
+</html>

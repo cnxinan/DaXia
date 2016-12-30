@@ -1,0 +1,147 @@
+﻿@model KCPS.WebFrameWork.Pager
+
+@if (Model.RecordAllCount == 0)
+{
+    <div class="NoRecord">
+        <p>很抱歉，没有找到符合条件的记录！</p>
+    </div>
+}
+else
+{
+    //这里处理分页的所有数据，比如判断上一页下一页是否显示，前置省略号和后置省略号是否显示等。
+    int proIndex = 0, nextIndex = 0;
+    if (Model.PageIndex <= 1)
+    {
+        Model.PageIndex = 1;
+    }
+    //首页
+    if (Model.PageIndex < Model.PageAllCount && Model.PageIndex > 1)
+    {
+        Model.IsFirstPage = true;
+    }
+    else
+    {
+        Model.IsFirstPage = false;
+    }
+    //末页
+    if (Model.PageIndex != Model.PageAllCount)
+    {
+        Model.IsLastPage = true;
+    }
+    else
+    {
+        Model.IsLastPage = false;
+    }
+    //上一页
+    if (Model.PageIndex > 1)
+    {
+        Model.IsProPage = true;
+        proIndex = Model.PageIndex - 1;
+    }
+    else
+    {
+        Model.IsProPage = false; 
+    }
+    if (Model.PageIndex < Model.PageAllCount)
+    {
+        Model.IsNextPage = true;
+        nextIndex = Model.PageIndex + 1;
+    }
+    else
+    {
+        Model.IsNextPage = false;
+    }
+    //下一页 
+    //左省略号
+    if (Model.PageIndex - 4 > 0)
+    {
+        Model.IsEllipsisFront = true;
+    }
+    else
+    {
+        Model.IsEllipsisFront = false;
+    }
+    //右省略号
+    if (Model.PageIndex + 4 > Model.PageAllCount)
+    {
+        Model.IsEllipsisBack = false;
+    }
+    else
+    {
+        Model.IsEllipsisBack = true;
+    }
+
+    /////////////////这段算法最关键，是取展示页数的起始值/////////////////////////////
+    int startIndex = 0;
+    int endIndex = 0;
+    if (Model.PageIndex < 6)
+    {
+        //展示1-9的页数。
+        startIndex = 1;
+        if (Model.PageAllCount < 10)
+        {
+            endIndex = Model.PageAllCount;
+        }
+        else
+        {
+            endIndex = 9;
+        }
+    }
+    else
+    {
+        startIndex = Model.PageIndex - 4;
+        if (Model.PageIndex + 4 > Model.PageAllCount)
+        {
+            endIndex = Model.PageAllCount;
+        }
+        else
+        {
+            endIndex = Model.PageIndex + 4;
+        }
+    }
+    /////////////////算法结束/////////////////////////////    
+    
+    <div class="pagectrl" style="border-top: 0px;">
+        @*<div id="deleteSpace">
+            <input type="checkbox" id="cbAll" />
+            <label for="cbAll">全选</label>
+        </div>*@
+        <div id="pageInfo">
+            <span class="TotalItems">共&nbsp;
+                <b class="Red">@Model.RecordAllCount</b>&nbsp;条数据　页次：
+                <b class="Red">@Model.PageIndex</b>/<b>@Model.PageAllCount</b>
+            </span>
+            <!--页码-->
+            <a href="@Model.PageUrl&Page=1">首页</a>
+            @if (Model.IsProPage)
+            {
+                <a href="@Model.PageUrl&Page=@proIndex">上一页</a>
+            }
+            @if (Model.IsEllipsisFront)
+            {
+                <span id="PageNum_PrevDot">... </span>
+            }
+            @for (int i = startIndex; i <= endIndex; i++)
+            {
+                if (i != Model.PageIndex)
+                {
+                <a href="@Model.PageUrl&Page=@i">@i</a> 
+                }
+                else
+                {
+                <a class="cur">@i</a>
+                }
+            }
+            @if (Model.IsEllipsisBack)
+            {
+                <span id="PageNum_NextDot">... </span>
+            }
+            @if (Model.IsNextPage)
+            {
+                <a href="@Model.PageUrl&Page=@nextIndex">下一页</a>
+            }
+            <a href="@Model.PageUrl&Page=@Model.PageAllCount">尾页</a>
+            <!--页码-->
+        </div>
+    </div>
+}

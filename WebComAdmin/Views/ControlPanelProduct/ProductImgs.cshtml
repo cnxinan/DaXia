@@ -1,0 +1,116 @@
+﻿@model KCPS.WebComAdmin.ProductImgListVM
+
+<!--内容-开始-->
+<div id="RightContainer">
+    <!--当前-开始-->
+    <div class="CtrlDiv">
+        <div class="left">
+            <b>产品管理</b> >> 多图管理
+        </div>
+        <div class="right">
+            <a class="addBtn addDefault" href="javascript:void" id="image_bt">添加图片</a>
+            <input type="hidden" id="Image" />
+            <a href="javascript:;" onclick="location.replace(location.href);" class="refreshBtn refreshDefault" style="margin-right: 0px;">刷新本页</a>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+    <!--当前-结束-->
+    <!--筛选-开始-->
+    <div class="FilterDiv">
+        <table class="fTable" cellspacing="0">            
+        </table>
+    </div>
+    <!--筛选-结束-->
+    <div class="DataDiv">
+        <div class="div100 m10">
+            <table class="dataTable" cellspacing="1">
+                <thead>
+                    <tr>
+                        <th style="width: 40px;">序号</th>
+                        <th style="width: 120px;">图片</th>
+                        <th style="width: 40px;">排序</th>
+                        <th style="width: 120px;">创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ var serialNo = 0; }
+                    @foreach (var item in Model.itemList)
+                    {
+                        serialNo++;
+                        <tr>
+                            <td>@serialNo</td>
+                            <td><img src="@item.Image" width="60" height="60" /></td>
+                            <td>@item.Sort</td>
+                            <td>@item.CreationTime</td>
+                            <td>
+                                <a href="#" onclick="RemoveImg('@item.Id')" class="AClass">删除</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @Html.Partial("PartialPaper", Model.page)
+    </div>
+</div>
+<!--内容-结束-->
+@section scripts
+{
+<link rel="stylesheet" href="/Scripts/kindeditor-4.1.10/themes/default/default.css" />
+<link rel="stylesheet" href="/Scripts/kindeditor-4.1.10/plugins/code/prettify.css" />
+<script charset="utf-8" src="/Scripts/kindeditor-4.1.10/kindeditor.js"></script>
+<script charset="utf-8" src="/Scripts/kindeditor-4.1.10/lang/zh_CN.js"></script>
+<script charset="utf-8" src="/Scripts/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+
+    <script type="text/javascript">
+
+        KindEditor.ready(function (K) {
+            //正面图片
+            var img = K.editor({
+                allowFileManager: true,
+                cssPath: '/Scripts/kindeditor-4.1.10/plugins/code/prettify.css',
+                uploadJson: '/Scripts/kindeditor-4.1.10/asp.net/upload_json.ashx',
+                fileManagerJson: '/Scripts/kindeditor-4.1.10/asp.net/file_manager_json.ashx'
+            });
+
+            K('#image_bt').click(function () {
+                img.loadPlugin('image', function () {
+                    img.plugin.imageDialog({
+                        imageUrl: K('#Image').val(),
+                        clickFn: function (url, title, width, height, border, align) {
+                            AddImg(url);
+                            img.hideDialog();
+                        }
+                    });
+                });
+            });
+        });
+
+        function AddImg(url) {
+            var id = '@Model.ProductId';
+            $.ajax({
+                type: "POST",
+                url: "/ControlPanelProduct/_ajaxAddImg",
+                data: { productId: id,url:url },
+                success: function (data) {
+                    alert(data);
+                    location.reload();
+                }
+            });
+        }
+
+        function RemoveImg(imgId) {
+            $.ajax({
+                type: "POST",
+                url: "/ControlPanelProduct/_ajaxRemoveImg",
+                data: { id: imgId },
+                success: function (data) {
+                    alert(data);
+                    location.reload();
+                }
+            });
+        }
+
+    </script>
+}

@@ -1,0 +1,71 @@
+﻿html,body { overflow-y:hidden}
+
+/*框架*/
+#Container,.pubdiv { width:100%; margin:0 auto;}
+
+/*显示方式*/
+#FrameSettingView { width:62px; height:14px; padding:6px; background:#6f6f6f; border-radius:0 5px 5px 0; position:absolute; z-index:777; left:-58px; bottom:20px; /*filter:alpha(opacity=90); -moz-opacity: 0.9; opacity: 0.9;*/}
+#FrameSettingView .view { width:21px; height:14px; margin-right:6px; float:left; display:inline; position:relative; overflow:hidden;}
+
+#FrameSettingView #V0 span { display:block; width:15px; height:8px; line-height:8px; position:relative; overflow:hidden; border:#585858 solid 3px; background:#585858 url(../../images/skin1/frame_view_bg.gif) no-repeat left top; cursor:pointer;}
+#FrameSettingView #V0 span.selected { border:#393939 solid 3px; background:#393939 url(../../images/skin1/frame_view_bg.gif) no-repeat left -8px;}
+
+#FrameSettingView #V1 span { display:block; width:15px; height:8px; line-height:8px; position:relative; overflow:hidden; border:#585858 solid 3px; background:#585858 url(../../images/skin1/frame_view_bg.gif) no-repeat -15px top; cursor:pointer;}
+#FrameSettingView #V1 span.selected { border:#393939 solid 3px; background:#393939 url(../../images/skin1/frame_view_bg.gif) no-repeat -15px -8px;}
+
+#FrameSettingView #VSetting { width:6px; height:9px; padding:3px 0 0 2px; *padding:0px 0 0 2px;  float:left; display:inline;}
+#FrameSettingView #VSetting a { width:6px; height:9px; display:block; background:url(../../images/skin1/frame_arrow.gif) no-repeat -6px center;}
+#FrameSettingView #VSetting a.close { width:6px; height:9px; display:block; background:url(../../images/skin1/frame_arrow.gif) no-repeat left center;}
+
+/*顶部*/
+#FrameTop { width:100%; height:80px; background:#0c3144; color:#dee5f2!important; border-bottom:#061824 solid 3px; position:relative; overflow:hidden;}
+#FrameTop .frameTable { width:100%; border:0px; height:80px;}
+
+#FrameTop a { color:#dee5f2!important;}
+#FrameTop a:hover { color:#fff!important;}
+
+/*左*/
+#FrameTop .frameTable .left { padding:0 0 0 10px; width:190px;}
+#FrameTop .frameTable .left .logo { width:238px; height:52px; background:url(../../images/logo.png) no-repeat;}
+*html #FrameTop .frameTable .left .logo { width:138px; height:52px; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src= "/admin/images/logo.png" ); background: none;}
+#FrameTop .frameTable .left .logo a { display:block; height:52px;}
+
+/*右*/
+#FrameTop .frameTable .right { padding:10px 10px 0 0; vertical-align:top; text-align:right;}
+#FrameTop .frameTable .right .time { padding:3px;}
+
+/*左侧功能菜单*/
+#FrameContent { width:100%; height:100%; border:0px;}
+.nobg { background:none;}
+.havebg { background:url(../../images/skin1/left_bg.gif) repeat-y;}
+#FrameContent .frameTable { width:100%; border:0px;}
+
+/*左*/
+#FrameContent .frameTable .FrameLeftTD { width:186px; padding:8px 8px 0 7px; vertical-align:top;}
+#FrameContent .frameTable .FrameLeftTD #LeftMenuDiv { width:100%;}
+.FunctionDiv { width:100%; padding-bottom:5px;}
+
+/*一级*/
+.FunctionDiv .firstMenu { height:30px; position:relative; overflow:hidden;}
+.FunctionDiv .firstMenu a { line-height:30px; line-height:33px\9; padding-left:30px; display:block; font-weight:bold; font-size:14px;}
+.FunctionDiv .first_ot { background:#e6e6e6 url(../../images/skin1/left_arr_1.gif) no-repeat 15px center; border-radius: 3px; -moz-transition:all 0.3s ease; -webkit-transition:all 0.3s ease; -o-transition:all 0.3s ease; background:url(../../images/skin1/left_first_menu_bg.gif) no-repeat left top\9;}
+.FunctionDiv .first_ot a { color:#444!important; text-shadow:1px 1px 1px #fff;}
+.FunctionDiv .first_over { background:#cdcdcd url(../../images/skin1/left_arr_1.gif) no-repeat 15px center; border-radius: 3px; -moz-transition:all 0.3s ease; -webkit-transition:all 0.3s ease; -o-transition:all 0.3s ease; background:url(../../images/skin1/left_first_menu_bg.gif) no-repeat left -30px\9;}
+.FunctionDiv .first_over a { color:#444!important; text-shadow:1px 1px 1px #fff;}
+.FunctionDiv .first_cur { background:#0c3144 url(../../images/skin1/left_arr_3.gif) no-repeat 15px 12px; border-radius: 3px; -moz-transition:all 0.3s ease; -webkit-transition:all 0.3s ease; -o-transition:all 0.3s ease; background:url(../../images/skin1/left_first_menu_bg.gif) no-repeat left -60px\9;}
+.FunctionDiv .first_cur a { color:#fff!important; text-shadow:1px 1px 1px #3a5d9e;}
+
+/*二级*/
+.FunctionDiv .SecondMenuCont { display:none; width:156px; padding:5px 15px;}
+.FunctionDiv .secondMenu { width:100%; height:25px; margin:5px 0; position:relative; overflow:hidden;}
+.FunctionDiv .secondMenu a { color:#333!important; line-height:25px; line-height:28px\9; padding-left:30px; display:block; text-shadow:1px 1px 1px #fff;}
+.FunctionDiv .second_ot { background:#f6f6f6 url(../../images/skin1/left_arr_4.gif) no-repeat 15px center; border-radius: 3px; -moz-transition:all 0.3s ease; -webkit-transition:all 0.3s ease; -o-transition:all 0.3s ease; background:url(../../images/skin1/left_second_menu_bg.gif) no-repeat left top\9;}
+.FunctionDiv .second_ot a { color:#333!important; text-shadow:1px 1px 1px #fff;}
+.FunctionDiv .second_over { background:#e6e6e6 url(../../images/skin1/left_arr_5.gif) no-repeat 15px center; border-radius: 3px; -moz-transition:all 0.3s ease; -webkit-transition:all 0.3s ease; -o-transition:all 0.3s ease; background:url(../../images/skin1/left_second_menu_bg.gif) no-repeat left -50px\9;}
+.FunctionDiv .second_over a { color:#0c3144!important; text-shadow:1px 1px 1px #fff;}
+.FunctionDiv .second_cur { background:#fff url(../../images/skin1/left_arr_2.gif) no-repeat 15px center; border-radius: 3px; -moz-transition:all 0.3s ease; -webkit-transition:all 0.3s ease; -o-transition:all 0.3s ease; background:url(../../images/skin1/left_second_menu_bg.gif) no-repeat left -25px\9;}
+.FunctionDiv .second_cur a { font-weight:bold; color:#0c3144!important; text-shadow:1px 1px 1px #f9f9f9;}
+
+
+/*右*/
+#FrameContent .frameTable .FrameRightTD { padding:0px; vertical-align:top; overflow-y:auto}

@@ -1,0 +1,83 @@
+﻿@{
+    Layout = null;
+}
+@model KCPS.WebComAdmin.Front.OrderDetailVM
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>订单详情</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+</head>
+<body>
+    <!-- viewport -->
+    <div class="viewport">
+        <!-- headerTop -->
+        <div class="headerTop">
+            <a href="javascript:history.go(-1);"><span class="return">返回</span></a>订单详情
+        </div>
+        <!-- end headerTop -->
+        <!-- address -->
+        <div class="address">
+            <div class="addressOne">
+                <div class="addCont">
+                    <ul class="perCenterUlb">
+                        <li>揭晓时间：<b class="color">@Model.gotDate</b></li>
+                        <li>开奖期数：<b class="color">@Model.processedNum</b></li>
+                        <li>总金额：<b class="color">￥@Model.productPrice</b></li>
+                        <li>收货人：@Model.receiver @Model.mobile</li>
+                        <li>收货地址：@Model.address</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="boxProduct clearfix allOrderCont">
+                <div class="product clearfix" id="allOrderPro">
+                    <a href="/FrontProduct/Product?id=@Model.productId">
+                        <div class="productImg"><img src="@Model.productImg"></div>
+                        <p>@Model.productName<br></p>
+                        <p><b class="color">￥@Model.productPrice</b></p>
+                    </a>
+                </div>
+                <span>X1</span>
+            </div>
+        </div>
+        <!-- end address -->
+        <!-- deliverGoods -->
+        <div class="deliverGoods">
+            共<b>1</b>件<span>总金额</span><b>￥@Model.productPrice</b>
+            @if (!Model.haveSent)
+            {
+                <button class="redColor" onclick="send('@Model.orderId')">我要发货</button>
+            }
+        </div>
+        <!-- end deliverGoods -->
+    </div>
+    <!-- end viewport -->
+    <script src="/Scripts/js/zepto.js"></script>
+    <script type="text/javascript">
+        function send(id) {
+            if (confirm('请确认商品已发货!')) {
+                $.ajax({
+                    type: 'post',
+                    dataType: 'text',
+                    data: 'id=' + id,
+                    url: '/FrontPerson/_AjaxSent',
+                    success: function (data) {
+                        alert(data);
+                        location.href = '/FrontPerson/MyOrder';
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

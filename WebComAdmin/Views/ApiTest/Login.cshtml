@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+
+<h2>登录</h2>
+<div>
+    用户名:<input type="text" name="username" id="username" />    
+    密  码:<input type="text" name="pwd" id="pwd" />
+    <input type="button" onclick="submit()" value="提交" />
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        function submit() {
+            var username = $("#username").val();
+            var mobile = $("#mobile").val();
+            var pwd = $("#pwd").val();
+
+            $.ajax({
+                type: "POST",
+                url: "/API/Login",
+                data: { username: username, pwd: pwd },
+                success: function (data) {
+                    alert(data);
+                }
+            });
+        }
+    </script>
+}

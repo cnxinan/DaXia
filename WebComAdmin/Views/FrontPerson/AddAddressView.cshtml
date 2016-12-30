@@ -1,0 +1,99 @@
+﻿@{
+    Layout = null;
+}
+@model KCPS.WebComAdmin.Front.AddressVM
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新增地址</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+</head>
+<body>
+    <!-- viewport -->
+    <div class="viewport">
+        <!-- headerTop -->
+        <div class="headerTop">
+            <a href="javascript:history.go(-1);"><span class="return">返回</span></a>新增地址
+        </div>
+        <!-- end headerTop -->
+        <!-- newAddress -->
+        <div class="newAddress">
+            <ul>
+                <li>
+                    <label>收货人姓名</label>
+                    <input type="text" name="receiverName" id="receiverName" placeholder="请填写收货人姓名" value="@Model.receiverName">
+                </li>
+                <li>
+                    <label>联系电话</label>
+                    <input type="text" name="mobile" id="mobile" placeholder="请填写联系电话" value="@Model.mobile">
+                </li>
+                <li>
+                    <label>省份</label>
+                    <input type="text" name="province" id="province" placeholder="请填写省份" value="@Model.province">
+                </li>
+                <li>
+                    <label>详细地址</label>
+                    <input type="text" name="address" id="address" placeholder="请填写详细地址(包含省市)" value="@Model.address">
+                </li>
+                <li>
+                    <label>邮政编码</label>
+                    <input type="text" name="zipcode" id="zipcode" placeholder="请填写邮政编码" value="@Model.zipcode">
+                </li>
+            </ul>
+            <button class="submit active" onclick="add()">保存</button>
+        </div>
+        <!-- end newAddress -->
+        <input type="hidden" value="@Model.addressId" name="addressId" id="addressId" />
+    </div>
+    <!-- end viewport -->
+    <script src="/Scripts/js/zepto.js"></script>
+    <script type="text/javascript">
+        function add() {
+            var id = $('#addressId').val();
+            var name = $('#receiverName').val();
+            var mobile = $('#mobile').val();
+            var province = $('#province').val();
+            var zipcode = $('#zipcode').val();
+            var address = $('#address').val();
+
+            if (name == undefined || name == '') {
+                alert('请填写收件人姓名');
+            }
+            if (mobile == undefined || mobile == '') {
+                alert('请填写联系手机');
+            }
+            if (province == undefined || province == '') {
+                alert('请填写省份');
+            }
+            //if (zipcode == undefined || zipcode == '') {
+            //    alert('请填写邮编');
+            //}
+            if (address == undefined || address == '') {
+                alert('请填写详细地址');
+            }
+
+            $.ajax({
+                type: 'post',
+                dataType: 'text',
+                data: 'addressId=' + id + "&receiverName=" + name + "&mobile=" + mobile +
+                    "&address=" + address + "&zipcode=" + zipcode + "&province=" + province,
+                url: '/FrontPerson/Ajax_Add',
+                success: function (data) {
+                    alert(data);
+                    location.href = '/FrontPerson/Address';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

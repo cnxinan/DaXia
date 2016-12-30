@@ -1,0 +1,45 @@
+﻿@model KCPS.WebComAdmin.BindSchoolVM
+
+<h2>@Model.Type:@Model.Name</h2>
+<hr />
+<div class="editor-field">
+@using (Html.BeginForm("_bindSchool", "Member", FormMethod.Post, new { onsubmit = "return checkInput()" }))
+    {
+    <div class="AddEditDiv">
+        @foreach (SelectListItem item in Model.Schools)
+        {
+            var ischecked = "";
+            if (item.Selected)
+            {
+                ischecked = "checked='checked'";
+            }
+            <input name="Schools" type="checkbox" value="@item.Value" @ischecked />
+            @item.Text
+
+        }
+        <table class="addTable" cellspacing="2">
+            <tr>
+                <td class="ltd"></td>
+                <td class="rtd">
+                    <input type="submit" class="submitBtn submitDefault" value="确 定" />
+                    <input type="reset" class="cancelBtn cancelDefault" value="重 置" />
+                </td>
+            </tr>
+        </table>
+    </div>
+}
+</div>
+
+<!--内容-结束-->
+@section scripts
+{
+    <script type="text/javascript">
+        @Html.Raw(ViewBag.JS)
+
+        function checkInput() {
+            showWorking();           
+
+            return true;
+        }        
+    </script>
+}

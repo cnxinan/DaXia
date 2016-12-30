@@ -1,0 +1,59 @@
+﻿@{
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>摇一摇</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+</head>
+<body>
+    <!-- viewport -->
+    <div class="viewport">
+        <!-- headerTop -->
+        <div class="headerTop">
+            <a href="javascript:history.go(-1);"><span class="return">返回</span></a>我要提现
+        </div>
+        <!-- end headerTop -->
+        <div class="withdrawals">
+            <input type="text" name="money" id="money" placeholder="请输入体现金额">
+            <label class="Red">最低提现金额100元</label>
+            <button class="submit active" onclick="tx()">确认提交</button>
+        </div>
+    </div>
+    @Html.Partial("_ShopFooter", 4)
+    <!-- end viewport -->
+    <script src="/Scripts/js/zepto.js"></script>
+    <script>
+        function tx() {
+            var amount = parseFloat($('#money').val());
+            if (amount >= 100) {
+                $.ajax({
+                    type: 'post',
+                    dataType: 'text',
+                    data: 'amount=' + amount,
+                    url: '/FrontPerson/_AjaxTX',
+                    success: function (data) {
+                        alert(data);
+                        location.href = '/FrontPerson/TXOrder';
+                    }
+                });
+            }
+            else
+            {
+                alert('提现最低限为100元');
+            }
+        }
+    </script>
+</body>
+</html>

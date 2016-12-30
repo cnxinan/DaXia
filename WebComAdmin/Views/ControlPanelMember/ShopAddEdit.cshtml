@@ -1,0 +1,137 @@
+﻿@model KCPS.WebComAdmin.ShopDetailsVM
+@using KCPS.WebFrameWork
+
+<!--内容-开始-->
+<div id="RightContainer">
+    <!--当前-开始-->
+    <div class="CtrlDiv">
+        <div class="left">
+            <b>会员管理</b>>>添加商铺
+        </div>
+        <div class="right">
+            <a href="/ControlPanelMember/Shops" class="backBtn backDefault" style="margin-right: 0px;">返回列表</a>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+    <!--当前-结束-->
+    <!--标签-开始-->
+
+    <div class="TabDiv">
+        <table class="tabTable" cellspacing="0">
+            <tr>
+                <td class="itemTD cur">商铺信息</td>
+            </tr>
+        </table>
+    </div>
+    <!--标签-结束-->
+    <!--表单-开始-->
+    @using (Html.BeginForm("ShopAddEdit", "ControlPanelMember", FormMethod.Post, new { onsubmit = "return checkInput()" }))
+    {
+        @Html.HiddenFor(model => model.Id)
+        <div class="AddEditDiv">
+            <table class="addTable ItemTable" cellspacing="2">
+                <tr>
+                    <td class="ltd">推荐人OpenId</td>
+                    <td class="rtd">
+                        @Html.TextBoxFor(model => model.ParentOpenId)
+                        <span class="f12 Red">可以为空</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ltd">微信OpenId</td>
+                    <td class="rtd">
+                        @Html.TextBoxFor(model => model.OpenId)
+                        <span class="f12 Red">*</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ltd">联系人</td>
+                    <td class="rtd">
+                        @Html.TextBoxFor(model => model.Contacts)
+                        <span class="f12 Red">* 必填</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ltd">地址</td>
+                    <td class="rtd">
+                        @Html.TextBoxFor(model => model.Address)
+                        <span class="f12 Red">* 必填</span>
+                    </td>
+                </tr>                
+                <tr>
+                    <td class="ltd">手机号</td>
+                    <td class="rtd">
+                        @Html.TextBoxFor(model => model.Mobile)
+                        <span class="f12 Red">* 必填</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ltd">购买产品份数</td>
+                    <td class="rtd">
+                        @Html.TextBoxFor(model => model.ProductNum)
+                        <span class="f12 Red">* 必填</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ltd">状态</td>
+                    <td class="rtd">
+                        @Html.EnumDropDownListFor(model=>model.Status, "请选择", new { @class = "selectBox-label" })
+                        <span class="selectBox-arrow"></span>
+                        <span class="f12 Red">* 必填</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ltd">备注</td>
+                    <td class="rtd">
+                        @Html.TextBoxFor(model => model.Note)
+                    </td>
+                </tr>
+            </table>
+            <table class="addTable" cellspacing="2">
+                <tr>
+                    <td class="ltd"></td>
+                    <td class="rtd">
+                        <input type="submit" class="submitBtn submitDefault" value="确 定" />
+                        <input type="reset" class="cancelBtn cancelDefault" value="重 置" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    }
+    <!--表单-结束-->
+</div>
+<!--内容-结束-->
+@section scripts
+{
+    <script type="text/javascript">
+
+        @Html.Raw(ViewBag.JS)
+
+        function checkInput() {
+
+            if ($('#Contacts').val() == '') {
+                alert('联系人不能为空');
+                return false;
+            }
+            
+            if ($('#Address').val() == '') {
+                alert('地址不能为空');
+                return false;
+            }
+
+            if ($('#ProductNum').val() == '') {
+                alert('购买产品份数不能为空');
+                return false;
+            }
+
+            if ($('#Mobile').val() == '') {
+                alert('手机不能为空');
+                return false;
+            }
+
+            showWorking();
+
+            return true;
+        }        
+    </script>
+}

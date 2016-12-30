@@ -1,0 +1,142 @@
+﻿@model KCPS.WebComAdmin.DiningVM
+@using KCPS.WebFrameWork
+
+<!--内容-开始-->
+<div id="RightContainer">
+    <!--当前-开始-->
+    <div class="CtrlDiv">
+        <div class="left">
+            <b>会员管理</b>>>添加餐厅
+        </div>
+        <div class="right">
+            <a href="@SiteUrls.Instance.M_DiningManage()" class="backBtn backDefault" style="margin-right: 0px;">返回列表</a>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+    <!--当前-结束-->
+    <!--标签-开始-->
+
+    <div class="TabDiv">
+        <table class="tabTable" cellspacing="0">
+            <tr>
+                <td class="itemTD cur">餐厅信息</td>
+            </tr>
+        </table>
+    </div>
+    <!--标签-结束-->
+    <!--表单-开始-->
+    @using (Html.BeginForm("DiningAddEdit", "Member", FormMethod.Post, new { onsubmit = "return checkInput()" }))
+    {
+        @Html.HiddenFor(model => model.Id)
+        <div class="AddEditDiv">
+            <table class="addTable ItemTable" cellspacing="2">
+                <tr>
+                    <td class="ltd">用户名</td>
+                    <td class="rtd">
+                        @Html.TextBoxFor(model => model.UserName)
+                        <span class="f12 Red">* 必填</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ltd">密码</td>
+                    <td class="rtd">
+                        @Html.TextBoxFor(model => model.Pwd)
+                        <span class="f12 Red">* 必填</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ltd">餐厅名称</td>
+                    <td class="rtd">
+                        @Html.TextBoxFor(model=>model.DiningName)
+                        <span class="f12 Red">* 必填</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ltd">餐厅地址</td>
+                    <td class="rtd">
+                        @Html.TextBoxFor(model => model.Address)
+                        <span class="f12 Red">* 必填</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ltd">餐厅负责人</td>
+                    <td class="rtd">
+                        @Html.TextBoxFor(model => model.RealName)
+                        <span class="f12 Red">* 必填</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ltd">手机号</td>
+                    <td class="rtd">
+                        @Html.TextBoxFor(model => model.Mobile)
+                        <span class="f12 Red">* 必填</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ltd">座机号</td>
+                    <td class="rtd">
+                        @Html.TextBoxFor(model => model.Tel)
+                    </td>
+                </tr>                
+            </table>
+            <table class="addTable" cellspacing="2">
+                <tr>
+                    <td class="ltd"></td>
+                    <td class="rtd">
+                        <input type="submit" class="submitBtn submitDefault" value="确 定" />
+                        <input type="reset" class="cancelBtn cancelDefault" value="重 置" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    }
+    <!--表单-结束-->
+</div>
+<!--内容-结束-->
+@section scripts
+{
+    <script type="text/javascript">
+
+        @Html.Raw(ViewBag.JS)
+
+        function checkInput() {
+            showWorking();
+
+            if ($('#UserName').val() == '') {
+                alert('用户名不能为空');
+                return false;
+            }
+
+            if ($('#Pwd').val() == '') {
+                alert('密码不能为空');
+                return false;
+            }
+
+            if ($('#DiningName').val() == '') {
+                alert('餐厅名称不能为空');
+                return false;
+            }
+
+            if ($('#Address').val() == '') {
+                alert('餐厅地址不能为空');
+                return false;
+            }
+
+            if ($('#RealName').val() == '') {
+                alert('餐厅负责人不能为空');
+                return false;
+            }
+
+            if ($('#Mobile').val() == '') {
+                alert('手机不能为空');
+                return false;
+            }
+
+            return true;
+        }
+
+        function AddSchool(id) {
+
+        }
+    </script>
+}

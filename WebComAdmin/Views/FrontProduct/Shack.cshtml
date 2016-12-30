@@ -1,0 +1,136 @@
+﻿@{
+    Layout = null;
+}
+@model KCPS.WebComAdmin.Front.ShackVM
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <title>摇一摇</title>
+    <link rel="stylesheet" href="/css/front/shake.css">
+    <script type="text/javascript" src="/Scripts/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/Scripts/js/howler.min.js"></script>
+    <script type="text/javascript" src="/Scripts/js/fastclick.js"></script>
+    @*<script type="text/javascript" src="/Scripts/js/shake.js"></script>*@
+</head>
+<body>
+    <table id="container">
+        <tbody>
+            <tr>
+                <td class="text-top">已有 @Model.haveActNumbers 人参加</td>
+            </tr>
+            <tr>
+                <td class="container" colspan="2">
+                    <div id="shake">
+                        <img src="/images/shake.png" class="shake_up" id="shakeup">
+                        <img src="/images/shake.png" class="shake_down" id="shakedown">
+                    </div>
+                </td> 
+            </tr>
+            <tr>
+                <td class="canttime">
+                    <form method="post" name="agree">
+                        <input type="submit" value="剩余60秒" name="agreeb">
+                    </form>
+                    <div class="cSum">您目前摇的次数：<span id="cSum">0</span></div>
+                </td>
+            </tr>
+            <tr id="cantshake" style="display:none">
+                <td class="controlbar" colspan="2">对不起，您的手机无法支持摇一摇！</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script type="text/javascript">
+        //摇一摇部分
+        var SHAKE_THRESHOLD = 1000;
+        var last_update = 0;
+        var last_time = 0;
+        var x;
+        var y;
+        var z;
+        var last_x;
+        var last_y;
+        var last_z;
+        var sum = 0;
+        var curTime;
+        var isShakeble = true;
+        function init() {
+            if (window.DeviceMotionEvent) {
+                window.addEventListener('devicemotion', deviceMotionHandler, false);
+            } else {
+                $("#cantshake").show();
+            }
+        }
+
+        var secs = 60;
+        for (i = 1; i <= secs; i++) {
+            window.setTimeout("update(" + i + ")", i * 1000);
+        }
+        function update(num) {
+            if (num == secs) {
+                document.agree.agreeb.value = "已结束！";
+                var score = $("#cSum").html();
+                window.location.href = "/FrontProduct/Ranking?id=@Model.productId&score=" + score;
+            }
+            else {
+                printnr = secs - num;
+                document.agree.agreeb.value = "剩余" + printnr + "秒";
+            }
+        }
+
+        function deviceMotionHandler(eventData) {
+            curTime = new Date().getTime();
+            var diffTime = curTime - last_update;
+            if (diffTime > 100) {
+                var acceleration = eventData.accelerationIncludingGravity;
+                last_update = curTime;
+                x = acceleration.x;
+                y = acceleration.y;
+                z = acceleration.z;
+                var speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
+
+                if (speed > SHAKE_THRESHOLD && curTime - last_time > 300 && isShakeble) {
+                    shake();
+                }
+                last_x = x;
+                last_y = y;
+                last_z = z;
+            }
+        }
+
+        function shake() {
+            last_time = curTime;
+            $("#shakeup").animate({ top: "10%" }, 100, function () {
+                $("#shakeup").animate({ top: "21%" }, 100, function () {
+                    sum++;
+                    if (sum > 0) {
+                        $(".cSum").show();
+                        $("#cSum").html(sum);
+                    } else {
+                        $(".cSum").hide();
+                    }
+                });
+            });
+            $("#shakedown").animate({ top: "40%" }, 100, function () {
+                $("#shakedown").animate({ top: "21%" }, 100, function () {
+                });
+            });
+
+        }
+
+        //各种初始化
+        $(document).ready(function () {
+            Howler.iOSAutoEnable = false;
+            FastClick.attach(document.body);
+            init();
+        });
+
+
+
+    </script>
+</body>
+</html>

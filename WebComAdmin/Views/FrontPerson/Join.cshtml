@@ -1,0 +1,89 @@
+﻿@{
+    Layout = null;
+}
+@model KCPS.WebComAdmin.Front.JoinVM
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我要加入</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+</head>
+<body>
+    <!-- viewport -->
+    <div class="viewport">
+        <!-- headerTop -->
+        <div class="headerTop">
+            <a href="javascript:history.go(-1);"><span class="return">返回</span></a>欢迎加入时尚代言人
+        </div>
+        <!-- end headerTop -->
+        <!-- join -->
+        @*<div class="joinTop">
+            <p>
+                我要创业
+                <input id="min" name="" type="button" value="-" /><input id="text_box" name="" type="text" value="1" /><input id="add" name="" type="button" value="+" />
+            </p>
+            <p>今日限购剩余：<b class="color">1256</b>份</p>
+        </div>*@
+        <div class="join">
+            <h2>联系信息</h2>
+            <form method="post" action="/FrontPerson/_AjaxAdd" id="form1">
+                <input type="hidden" name="id" value="@Model.id" />
+                <ul> 
+                    <li><label>联系人：</label><input type="text" name="contacts" id="contacts" placeholder="请输入联系人姓名" value="@Model.contacts"></li>
+                    <li><label>联系电话：</label><input type="text" name="mobile" id="mobile" placeholder="请输入联系人联系电话" value="@Model.mobile"></li>
+                    <li><label>微信号：</label><input type="text" name="weChatName" id="weChatName" placeholder="请输入微信号" value="@Model.weChatName"></li>
+                    <li><label>联系地址：</label><input type="text" name="address" id="address" placeholder="请输入联系地址" value="@Model.address"></li>
+                    <li><label>备注：</label><input type="text" name="note" id="note" placeholder="请输入备注" value="@Model.note"></li>
+                    <li><label>我要创业：</label><button class="redColor" onclick="submit()">成为董事长</button></li>
+                </ul>
+            </form>
+        </div>
+        <div>
+
+        </div>
+        <div class="listScroll">
+            <ul>
+                <li>
+                    <div class="section seckill clearfix">
+                        <div class="bgimg">
+                            <img src="/images/zs.png">
+                        </div>
+                        <p class="titleText">零食干果礼盒坚果8件套--华丽升级时尚代言人</p>
+                        <p class="follow" style="padding-top:8px">
+                            88专属套餐
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- end join -->
+        @*<p class="xdTime">购物车总计</p>
+        <!-- deliverGoods -->
+        <div class="deliverGoods">
+            已选<b>1</b>份<span>共计</span><b>￥999.00</b>
+            <button class="redColor">立即购买</button>
+        </div>
+        <!-- end deliverGoods -->*@
+    </div>
+    <!-- end viewport -->
+    <script src="/Scripts/js/zepto.js"></script>
+    <script src="/Scripts/js/gmu.js"></script>
+    <script src="/Scripts/js/slide-touch.js"></script>
+    <script type="text/javascript">
+        function submit() {
+            $('#form1').submit();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+﻿@{
+    Layout = null;
+}
+@model KCPS.EntityDataModels.Product
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>@Model.Name</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+</head>
+<body>
+    <!-- viewport -->
+    <div class="viewport">
+        <!-- headerTop -->
+        <div class="headerTop">
+            <a href="product.html"><span class="return">返回</span></a>@Model.Name
+        </div>
+        <!-- end headerTop -->
+        <!-- product -->
+
+        <div class="product">
+            <div class="productCont">
+                <div class="productContent" style="display:block">
+                    @Html.Raw(Model.Content)
+                </div>
+            </div>
+            <!-- end product -->
+        </div>
+        <!-- cart -->
+        <!-- end cart -->
+        <!-- footer -->
+        @Html.Partial("_FrontBottom", 1)
+        <!-- end footer -->
+        <!-- end viewport -->
+        <script src="/Scripts/js/zepto.js"></script>
+        <script src="/Scripts/js/zepto.extend.js"></script>
+        <script src="/Scripts/js/zepto.ui.js"></script>
+        <script src="/Scripts/js/zepto.iscroll.js"></script>
+        <script src="/Scripts/js/navigator.js"></script>
+        <script src="/Scripts/js/navigator.iscroll.js"></script>
+        <script type="text/javascript">
+    (function () {
+        $('#nav-smartSetup').navigator();
+        $("#nav-smartSetup ul li").on('click', function(e) {
+            var _index = $(this).index();
+            $(".product .productCont .productContent").eq(_index).show().siblings().hide();
+        })
+    })();
+        </script>
+</body>
+</html>

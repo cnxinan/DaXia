@@ -1,0 +1,208 @@
+﻿@model KCPS.WebComAdmin.HomeVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=10" />
+    <title>客户资源管理系统</title>
+    <link href="/css/skin1/global.css" rel="stylesheet" type="text/css" />
+    <link href="/css/skin1/frame.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/scripts/easydialog/easydialog.css" />
+    <script type="text/javascript" src="/scripts/jquery-1.8.0.js"></script>
+    <script type="text/javascript" src="/scripts/myscripts/leftmenu.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var _screenHeight = $(window).height();
+            var _frameHeight = _screenHeight - 83;
+            $("#iframepage").attr("height", _frameHeight + "px");
+        })
+    </script>
+</head>
+<body>
+    <script type="text/javascript" src="/scripts/easydialog/easydialog.js"></script>
+    <script type="text/javascript" src="/scripts/myscripts/show.js"></script>
+    <script type="text/javascript" src="/scripts/myscripts/clock.js"></script>
+    <!--框架-开始-->
+    <div id="Container">
+        <!--顶部-开始-->
+        <div id="FrameTop">
+            <table class="frameTable" cellspacing="0">
+                <tr>
+                    <td class="left">
+                        <div class="logo1"><a href="javascript:void(0)"></a></div>
+                    </td>
+                    <td class="right">
+                        <div class="m10">
+                            <b>欢迎您 <strong>@Model.UserName</strong></b>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="javascript:void(0)" onclick="DoDialog('确认要退出本系统吗？', '/ControlPanel/Logout')" class="Underline">退出</a>
+                        </div>
+                        <p class="time"><b>北京时间</b>：@DateTime.Now.ToString("yyyy-MM-dd") <span id="Clock0"></span></p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--顶部-结束-->
+        <div id="FrameSettingView">
+            <div id="V0" class="view"><span class="selected" title="分栏"></span></div>
+            <div id="V1" class="view"><span title="通栏"></span></div>
+            <div id="VSetting"><a href="javascript:void(0)" title="展开"></a></div>
+            <div class="clearboth"></div>
+        </div>
+    </div>
+    <!--框架-结束-->
+    <!--中间-开始-->
+    <div id="FrameContent" class="havebg">
+        <table class="frameTable" cellspacing="0">
+            <tr>
+                <td class="FrameLeftTD">
+                    <!--左侧-开始-->
+                    <div id="LeftMenuDiv">
+                        <div class="FunctionDiv">
+                            <div class="firstMenu first_ot">
+                                <a href="javascript:void(0)">会员管理</a>
+                            </div>
+                            <div class="SecondMenuCont">
+                                <div>
+                                    <div class="secondMenu second_ot">
+                                        <a href="/ControlPanelMember/Shops" target="iframepage">大侠管理</a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="secondMenu second_ot">
+                                        <a href="/ControlPanelMember/Members" target="iframepage">用户管理</a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="secondMenu second_ot">
+                                        <a href="/ControlPanelMember/Captcha" target="iframepage">验证码管理</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="FunctionDiv">
+                            <div class="firstMenu first_ot">
+                                <a href="javascript:void(0)">产品管理</a>
+                            </div>
+                            <div class="SecondMenuCont">
+                                <div>
+                                    <div class="secondMenu second_ot">
+                                        <a href="/ControlPanelProduct/ProductTypes" target="iframepage">分类管理</a>
+                                    </div>
+                                </div>                                
+                                <div>
+                                    <div class="secondMenu second_ot">
+                                        <a href="/ControlPanelProduct/Products" target="iframepage">产品管理</a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="secondMenu second_ot">
+                                        <a href="/ControlPanelOrder/BuyOrders" target="iframepage">订单管理</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="FunctionDiv">
+                            <div class="firstMenu first_ot"><a href="javascript:void(0)">数据统计</a>
+                            </div>
+                            <div class="SecondMenuCont">
+                                <div>
+                                    <div class="secondMenu second_ot">
+                                        <a href="/ControlPanelOrder/RewardRecords" target="iframepage">销量统计</a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="secondMenu second_ot">
+                                        <a href="/ControlPanelOrder/WatiForSending" target="iframepage">大侠统计</a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="secondMenu second_ot">
+                                        <a href="/ControlPanelOrder/HaveSended" target="iframepage">订单统计</a>
+                                    </div>
+                                </div>
+                                @*<div>
+                                    <div class="secondMenu second_ot">
+                                        <a href="/ControlPanelOrder/BuyOrders" target="iframepage">购物订单-不要</a>
+                                    </div>
+                                </div>*@
+                            </div>
+                        </div>
+                        <div class="FunctionDiv" style="display:none">
+                            <div class="firstMenu first_ot">
+                                <a href="javascript:void(0)">配送管理(2期)</a>
+                            </div>
+                            <div class="SecondMenuCont">
+                                <div>
+                                    <div class="secondMenu second_ot">
+                                        <a href="/ControlPanelFinance/PersonalAccount" target="iframepage">配送方式</a>
+                                    </div>
+                                </div>                                
+                            </div>
+                        </div>
+                        <div class="FunctionDiv">
+                            <div class="firstMenu first_ot"><a href="javascript:void(0)">系统设置</a></div>
+                            <div class="SecondMenuCont">
+                                <div>
+                                    <div class="secondMenu second_ot">
+                                        <a href="/ControlPanelSetting/SiteSetting" target="iframepage">基本设置</a>
+                                    </div>
+                                </div>
+                                @*<div>
+                                    <div class="secondMenu second_ot">
+                                        <a href="/ControlPanelSetting/ManageAdmins" target="iframepage">权限管理（2期）</a>
+                                    </div>
+                                </div>*@
+                                <div>
+                                    <div class="secondMenu second_ot">
+                                        <a href="/ControlPanelSetting/ResetPassword" target="iframepage">修改密码</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="FunctionDiv" style="display:none">
+                            <div class="firstMenu first_ot"><a href="javascript:void(0)">意见管理</a></div>
+                            <div class="SecondMenuCont">
+                                <div>
+                                    <div class="secondMenu second_ot">
+                                        <a href="/ControlPanelSetting/ManageAds" target="iframepage">意见反馈</a>
+                                    </div>
+                                </div>                                
+                            </div>
+                        </div>
+                        <div class="FunctionDiv" style="display:none">
+                            <div class="firstMenu first_ot"><a href="javascript:void(0)">日志管理</a></div>
+                            <div class="SecondMenuCont">
+                                <div>
+                                    <div class="secondMenu second_ot">
+                                        <a href="/ControlPanelSetting/ManageAds" target="iframepage">操作日志</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--左侧-结束-->
+                </td>
+                <td class="FrameRightTD" style="overflow-y: hidden;">
+                    <iframe src="/ControlPanel/Main" id="iframepage" name="iframepage" frameborder="0" scrolling="auto" width="100%"></iframe>
+                    <script type="text/javascript" language="javascript">
+                        function iFrameHeight() {
+                            var ifm = document.getElementById("iframepage");
+                            var subWeb = document.frames ? document.frames["iframepage"].document : ifm.contentDocument;
+                            if (ifm != null && subWeb != null) {
+                                ifm.height = subWeb.body.scrollHeight;
+                            }
+                        }
+                    </script>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!--中间-结束-->
+</body>
+</html>
+

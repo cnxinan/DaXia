@@ -1,0 +1,125 @@
+﻿@{
+    Layout = null;
+}
+@model KCPS.WebComAdmin.Front.PaymentVM
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品支付</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+</head>
+<body>
+    <!-- viewport -->
+    <div class="viewport">
+        <!-- headerTop -->
+        <div class="headerTop">
+            <a href="javascript:history.go(-1);"><span class="return">返回</span></a>完善订单
+        </div>
+        <!-- end headerTop -->
+        <!-- product -->
+        <div class="product">
+            @if (Model.addressId == Guid.Empty)
+            {
+                <!-- 无地址显示 -->
+                <div class="pulsAdd">
+                    <p><a href="/FrontPerson/Address">增加收货地址<b class="color">&gt;</b></a></p>
+                </div>
+            }
+            else
+            {
+                <!-- 有地址显示 -->
+                <div class="pulsAdd">
+                    <p>
+                        <a href="/FrontProduct/AddressBind?addressId=@Model.addressId&pId=@Model.productId">
+                            收货人：@Model.reciver @Model.mobile<br>
+                            收获地址：@Model.address
+                            <b class="color">&gt;</b>
+                        </a>
+                    </p>
+                </div>
+            }
+            <div class="productText clearfix">
+                <div class="productTextLogo"><a href=""><img src="@Model.productImg"></a></div>
+                <p>@Model.productName</p>
+                <p><b>￥@Model.price</b></p>
+                <input type="number" class="quantity_shop" id="count" value="@Model.count" name="count" onchange="countChange()" />
+            </div>
+        </div>
+        <ul class="shfs">
+            <li>发货方式<b class="color">快递：0元(包邮)</b></li>
+            <li>订单总价<b class="color">￥<span id="orderTotal">1200</span></b></li>
+        </ul>
+        <div class="zffs">
+            <p>选择支付方式<b class="color font">合计金额：<span class="color">￥<span id="payTotal">30.00</span></span></b></p>
+            <p class="wechat">微信支付<b class="color"><input type="checkbox" name="checkbox" checked></b></p>
+        </div>
+    </div>
+    <!-- end product -->
+    <!-- cart -->
+    @if (Model.addressId == Guid.Empty)
+    {
+        <div class="mycart-cart">
+            <span><b>请选择收货地址</b></span>
+        </div>
+    }
+    else
+    {
+        <div class="mycart-cart">
+            <span>总价：<span id="payTotal2">￥1200</span></span>
+            <button class="redColor" onclick="buy()">立即支付</button>
+        </div>
+    }
+
+
+
+    <form id="buy" method="post" action="/FrontProduct/AddProductOrder">
+        <input type="hidden" id="productId" name="productId" value="@Model.productId" />
+        <input type="hidden" id="addressId" name="addressId" value="@Model.addressId" />
+        <input type="hidden" id="goodCount" name="goodCount" />
+        <input type="hidden" id="orderAmount" name="orderAmount" />
+    </form>
+    <!-- end cart -->
+    <!-- footer -->
+    @Html.Partial("_FrontBottom", 3)
+    <!-- end footer -->
+    <!-- end viewport -->
+    <script src="/Scripts/js/zepto.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            countChange();
+        })
+
+        function countChange() {
+            var count = $('#count').val();
+            if (count < 1) {
+                $('#count').val(1);
+            }
+            var finalPrice = count * parseFloat('@Model.price');
+            $('#goodCount').val(count);
+            $('#orderAmount').val(finalPrice);
+            var orderTotal = $('#orderTotal').html(finalPrice);
+            var payTotal = $('#payTotal').html(finalPrice);
+            var payTotal2 = $('#payTotal2').html('￥' + finalPrice);
+        }
+
+        function shack(productId) {
+            location.href = "/FrontProduct/Shack?id=" + productId;
+        }
+
+        function buy(productId) {
+            $('#buy').submit();
+        }
+    </script>
+
+</body>
+</html>
