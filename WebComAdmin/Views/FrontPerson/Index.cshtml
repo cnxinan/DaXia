@@ -1,0 +1,71 @@
+﻿@{
+    Layout = null;
+}
+@model KCPS.WebComAdmin.Front.PersonIndexVM
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>代言人</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+</head>
+<body>
+    <!-- viewport -->
+    <div class="viewport">
+        <div class="personalCenter">
+            <div class="perCenterTop">
+                <div class="perCenterLogo">
+                    <img src="@Model.headImg">
+                </div>
+                <p>@Model.nickName</p>
+                <p>余额：@Model.balance</p>
+            </div>
+            <div class="perCenterRecord">
+                <p>
+                    @*夺宝记录
+                    <b class="color">
+                        <a href="/FrontPerson/RewardRecords">查看全部订单&gt;</a>
+                    </b>*@
+                    <ul class="perCenterUl">
+                        <li><a href="/FrontPerson/RewardRecords">@*<i>9</i>*@夺宝记录</a></li>
+                        <li><a href="/FrontPerson/BuyOrders">购物订单</a></li>
+                    </ul>
+                </p>
+                <ul class="perCenterUlb">
+                    <li class="icon-zhmx"><a href="/FrontPerson/TradeRecords">帐号明细</a><span></span></li>
+                    <li class="icon-qcz">
+                        <a href="/FrontPerson/RechargeView?userId=@Model.ID">去充值</a><span></span>
+                    </li>
+                    <li class="icon-wdsc"><a href="/FrontHome/MyFollow">我的收藏</a><span></span></li>
+                    <li class="icon-dzgl"><a href="/FrontPerson/Address">地址管理</a><span></span></li>
+                    @if (Model.isShop)
+                    {
+                        if (!Model.havePayed)
+                        {
+                            <li class="icon-dzgl"><a href="/FrontPerson/Join">我要加入</a><span></span></li>
+                        }
+                        else
+                        {
+                            <li class="icon-wdyh"><a href="/FrontPerson/MyBank">我的银行</a><span></span></li>
+                            <li class="icon-wddsj"><a href="/FrontPerson/MyDirector">我的粉丝团</a><span></span></li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+    @Html.Partial("_FrontBottom", 4)
+    <!-- end footer -->
+    <!-- end viewport -->
+</body>
+</html>

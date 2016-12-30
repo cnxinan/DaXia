@@ -1,0 +1,90 @@
+﻿@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>收藏商品</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+</head>
+<body>
+    <!-- viewport -->
+    <div class="viewport">
+        <!-- headerTop -->
+        <div class="headerTop">
+            <a href="javascript:history.go(-1);"><span class="return">返回</span></a>收藏商品
+            <span class="edit">编辑</span>
+            <span class="complete">完成</span>
+        </div>
+        <!-- end headerTop -->
+        <!-- productTop -->
+        <div class="productTop">
+            <div class="boxProduct">
+                <div class="choice"><input type="checkbox" name="checkbox"></div>
+                <div class="product clearfix">
+                    <a href="product.html">
+                        <div class="productImg"><img src="images/list-liimg01.jpg"></div>
+                        <p>汾酒蓝花瓷 53° 500ml（新老包装）<br>随机发货</p>
+                    </a>
+                </div>
+                <div class="clear"></div>
+                <p class="follow">
+                    <span class="active"></span>
+                    685803<br>关注
+                </p>
+                <div class="number">
+                    <div class="strip"><span class="strip-color" style="width:40%;"></span></div>
+                    <span class="textleft">以参与：910</span>
+                    <span>总需人次：4599</span>
+                    <span class="textright">剩余：3689</span>
+                </div>
+            </div>
+            <div class="boxProduct">
+                <div class="choice"><input type="checkbox" name="checkbox"></div>
+                <div class="product clearfix">
+                    <a href="product.html">
+                        <div class="productImg"><img src="images/list-liimg01.jpg"></div>
+                        <p>汾酒蓝花瓷 53° 500ml（新老包装）<br>随机发货</p>
+                    </a>
+                </div>
+                <div class="clear"></div>
+                <p class="follow">
+                    <span class="active"></span>
+                    685803<br>关注
+                </p>
+                <div class="number">
+                    <div class="strip"><span class="strip-color" style="width:40%;"></span></div>
+                    <span class="textleft">以参与：910</span>
+                    <span>总需人次：4599</span>
+                    <span class="textright">剩余：3689</span>
+                </div>
+            </div>
+        </div>
+        <!-- end productTop -->
+        <!-- delete -->
+        <div class="delete">
+            <label>
+                <input class="chooseall" name="checkboxAll" type="checkbox">&nbsp;全选
+                <button class="bgColor" disabled>删除</button>
+            </label>
+        </div>
+        <!-- end delete -->
+    </div>
+    @Html.Partial("_FrontBottom", 4)
+    <!-- end viewport -->
+    <script src="/Scripts/js/zepto.js"></script>
+    <script src="/Scripts/js/gmu.js"></script>
+    <script src="/Scripts/js/slide-touch.js"></script>
+</body>
+</html>

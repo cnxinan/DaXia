@@ -1,0 +1,81 @@
+﻿@model KCPS.WebComAdmin.OrderListVM
+
+
+<!--内容-开始-->
+<div id="RightContainer">
+    <!--当前-开始-->
+    <div class="CtrlDiv">
+        <div class="left"><b>销量统计</b> >> 大侠统计</div>
+        <div class="right">
+            <a href="javascript:;" onclick="location.replace(location.href);" class="refreshBtn refreshDefault" style="margin-right: 0px;">刷新本页</a>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+    <!--当前-结束-->
+    <!--筛选-开始-->
+    <div class="FilterDiv">
+        <table class="fTable" cellspacing="0">
+            <tr>
+                <td class="itemTD">会员编号：</td>
+                <td class="itemSP">
+                    <input name="userNo" id="userNo" type="text" class="smalltxt" onkeydown="if(event.keyCode==13){document.getElementById('SearchBtn').click();return false;}" />
+                </td>
+                <td class="itemTD">产品编号：</td>
+                <td class="itemSP">
+                    <input name="userName" id="userName" type="text" class="smalltxt" onkeydown="if(event.keyCode==13){document.getElementById('SearchBtn').click();return false;}" />
+                </td>                
+                <td>
+                    <input type="button" value="搜 索" id="SearchBtn" class="searchBtn searchDefault" onclick="Search()" /></td>
+            </tr>
+        </table>
+    </div>
+    <!--筛选-结束-->
+    <div class="DataDiv">
+        <div class="div100 m10">
+            <table class="dataTable" cellspacing="1">
+                <thead>
+                    <tr>
+                        <th style="width: 40px;">序号</th>
+                        <th style="width: 80px;">会员名称</th>
+                        <th style="width: 80px;">产品名称</th>
+                        <th style="width: 80px;">销售数量</th>
+                        <th style="width: 80px;">销售金额</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int serialNo = 0;}
+                    @foreach (var item in Model.itemList)
+                    {
+                        serialNo++;
+                        <tr>
+                            <td>@serialNo</td>
+                            <td>@item.memberNo</td>
+                            <td>@item.memberOpenId</td>
+                            <td>@item.nickName</td>
+                            <td>@item.productName</td>
+                            <td>@item.processNum</td>
+                            <td>@item.creationDate</td>
+                            <td>                                
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        @Html.Partial("PartialPaper",Model.page)
+    </div>
+</div>
+<!--内容-结束-->
+@section scripts
+{
+    <script type="text/javascript">
+        function Search() {
+
+        }
+    </script>
+}
+
+
+

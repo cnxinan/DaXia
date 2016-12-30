@@ -1,0 +1,71 @@
+﻿@{
+    Layout = null;
+}
+@model KCPS.WebComAdmin.Front.AddressListVM
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>地址管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+</head>
+<body>
+    <!-- viewport -->
+    <div class="viewport">
+        <!-- headerTop -->
+        <div class="headerTop">
+            <a href="javascript:history.go(-1);"><span class="return">返回</span></a>地址管理
+            <span class="newAdd"><a href="/FrontPerson/AddAddressView">新增地址</a></span>
+        </div>
+        <!-- end headerTop -->
+        <!-- address -->
+        <div class="address">
+            @foreach (var item in Model.addressList)
+            {
+                <div class="addressOne">
+                    <div class="addCont">
+                        <p>@item.receiverName @item.mobile </p>
+                        <p><span>@item.address</span></p>
+                    </div>
+                    <label class="addColor">
+                        <button class="" onclick="deleteAddress('@item.addressId')">删除</button>
+                        <button class="" onclick="editAddress('@item.addressId')">编辑</button>
+                    </label>
+                </div>
+            }  
+        </div>
+        <!-- end address -->
+    </div>
+    <!-- end viewport -->
+    <script src="/Scripts/js/zepto.js"></script>
+    <script type="text/javascript">
+        function deleteAddress(id) {
+            if (confirm('是否删除该地址?')) {
+                $.ajax({
+                    type: 'post',
+                    dataType: 'text',
+                    data: 'addressId=' + id,
+                    url: '/FrontPerson/Ajax_Delete',
+                    success: function (data) {
+                        alert(data);
+                        location.href = '/FrontPerson/Address';
+                    }
+                });
+            }            
+        }
+
+        function editAddress(id) {
+            location.href = '/FrontPerson/AddAddressView?id=' + id;;
+        }
+    </script>
+</body>
+</html>

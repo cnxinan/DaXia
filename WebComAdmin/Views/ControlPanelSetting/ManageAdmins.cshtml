@@ -1,0 +1,84 @@
+﻿@model KCPS.WebComAdmin.ManageAdminVM
+@using KCPS.WebFrameWork
+
+<!--内容-开始-->
+<div id="RightContainer">
+    <!--当前-开始-->
+    <div class="CtrlDiv">
+        <div class="left"><b>系统管理</b> >> 管理员管理</div>
+        <div class="right">
+            <a class="addBtn addDefault" href="@SiteUrls.Instance.M_ManageAddAndEdit()">添加新管理员</a>
+            <a href="javascript:;" onclick="location.replace(location.href);" class="refreshBtn refreshDefault" style="margin-right: 0px;">刷新本页</a>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+    <!--当前-结束-->
+    <!--筛选-开始-->
+    <div class="FilterDiv">
+        <table class="fTable" cellspacing="0">
+            <tr>
+                <td class="itemTD">管理员类型：</td>
+                <td class="itemSP">
+                    @Html.EnumDropDownList("managertype", Request.QueryString.Get<ManagerType?>("managertype"),ManagerType.SuperAdmin, "请选择", new {@class = "selectBox-label"})
+                    <span class="selectBox-arrow"></span>
+                </td> 
+                <td>
+                    <input type="button" value="搜 索" id="SearchBtn" class="searchBtn searchDefault" onclick="Search()" />
+                </td>               
+            </tr>            
+        </table>        
+    </div>
+    <!--筛选-结束-->
+    <div class="DataDiv">
+        <div class="div100 m10">
+            <table class="dataTable" cellspacing="1">
+                <thead>
+                    <tr>
+                        <th style="width: 40px;">序号</th>
+                        <th style="width: 60px;">用户名</th>
+                        <th style="width: 70px;">最近登陆时间</th>
+                        <th style="width: 100px;">最近登陆IP</th>
+                        <th style="width: 80px;">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int serialNo = 0;}
+                    @foreach (var manager in Model.itemList)
+                    {
+                        serialNo++;  
+                        <tr>
+                            <td>@serialNo</td>
+                            <td>@manager.username</td>
+                            <td>@manager.lastLoginTime</td>
+                            <td>@manager.lastLoginIp</td>
+                            <td>
+                                <a href="javascript:Lock('@manager.id')" class="AClass">禁用</a>
+                                <a href="javascript:UnLock('@manager.id')" class="AClass">删除</a>                                
+                            </td>
+                        </tr>           
+                    }
+                </tbody>
+            </table>
+        </div>
+        @Html.Partial("PartialPaper", Model.page)
+    </div>
+</div>
+<!--内容-结束-->
+@section scripts
+{
+    <script type="text/javascript">
+        //搜索
+        function Search() {
+        }
+
+        //禁用/启用管理
+        function loclOrUnlock() {
+        }
+
+        //删除管理
+        function deleteUser() {
+
+        }
+    </script>
+    }
+

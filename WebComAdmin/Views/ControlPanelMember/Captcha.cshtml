@@ -1,0 +1,82 @@
+﻿@model KCPS.WebComAdmin.MemberListVM
+
+<!--内容-开始-->
+<div id="RightContainer">
+    <!--当前-开始-->
+    <div class="CtrlDiv">
+        <div class="left"><b>会员管理</b> >>验证码管理</div>
+        <div class="right">
+            <a href="javascript:;" onclick="location.replace(location.href);" class="refreshBtn refreshDefault" style="margin-right: 0px;">刷新本页</a>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+    <!--当前-结束-->
+    <!--筛选-开始-->
+    <div class="FilterDiv">
+        <table class="fTable" cellspacing="0">
+            <tr>
+                <td class="itemTD">生成者：</td>
+                <td class="itemSP">
+                    <input name="userNo" id="userNo" type="text" class="smalltxt" onkeydown="if(event.keyCode==13){document.getElementById('SearchBtn').click();return false;}" />
+                </td>
+                <td>
+                    <input type="button" value="搜 索" id="SearchBtn" class="searchBtn searchDefault" onclick="Search()" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!--筛选-结束-->
+    <div class="DataDiv">
+        <div class="div100 m10">
+            <table class="dataTable" cellspacing="1">
+                <thead>
+                    <tr>
+                        <th style="width: 40px;">序号</th>
+                        <th style="width: 80px;">验证码</th>
+                        <th style="width: 120px;">生成时间</th>
+                        <th style="width: 100px;">使用时间</th>
+                        <th style="width: 100px;">使用者</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int serialNo = 0;}
+                    @foreach (var item in Model.itemList)
+                    {
+                        serialNo++;
+                        <tr>
+                            <td>@serialNo</td>
+                            <td>@item.OpenId</td>
+                            <td>@item.WeChatName</td>
+                            <td><img src="@item.WeChatImage" /></td>
+                            <td>@item.Balance</td>
+                            <td>@item.CreationTime</td>
+                            <td>
+                                @*<a href="javascript:Lock('')" class="AClass">禁用</a>*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @Html.Partial("PartialPaper", Model.page)
+        @*@Html.Partial("PartialPaper", Utility.pagedefault)*@
+    </div>
+</div>
+<!--内容-结束-->
+@section scripts
+{
+    <script type="text/javascript">
+        function Search() {
+            var userNo = $('#userNo').val();
+            location.href = '/ControlPanelMember/Members?userNo=' + userNo;
+        }
+
+        function SchoolManage(id) {
+            ShowIdeaDialog("绑定学校", "<iframe frameborder='0' scrolling='no' width='100%' height='300' src='/Member/_bindSchool?id=" + id + "&type=130'></iframe>", "500", "300", false, "");
+        }
+    </script>
+}
+
+
+

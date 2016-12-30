@@ -1,0 +1,70 @@
+﻿@{
+    Layout = null;
+}
+@model KCPS.WebComAdmin.Front.LateestRewardsListVM
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>最新揭晓</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+</head>
+<body>
+    <!-- viewport -->
+    <div class="viewport">
+        <!-- headerTop -->
+        <div class="headerTop">
+            <a href="javascript:history.go(-1);"><span class="return">返回</span></a>最新揭晓
+        </div>
+        <!-- end headerTop -->
+        <!-- listScroll -->
+        <div class="listScroll">
+            <ul>
+                @foreach (var item in Model.itemList)
+                {
+                    <li>
+                        <div class="newsAnnounced clearfix">
+                            <div class="imgLeft">
+                                <a href="/FrontProduct/Product?id=@item.productId">
+                                    <img src="@item.productHeadImg">
+                                </a>
+                            </div>
+                            <a href="/FrontHome/PeopleRewardRecord?OpenId=@item.openId">
+                                <div class="imgRight">
+                                    <div class="iconImg">
+                                        <img src="@item.memberHeadImg">
+                                    </div>
+                                    <p>获得者：<span class="redColor">@item.memberName</span></p>
+                                    <p>本期购买：<span class="redColor">@item.boughtCountg 次</span></p>
+                                    <p class="pBottom">揭晓时间：@item.GotTime</p>
+                                </div>
+                                <div class="icon-right"></div>
+                            </a>
+                        </div>
+                    </li>
+                }
+            </ul>
+            <div id="LoadingMsg">
+                <span>正在加载</span>
+            </div>
+        </div>
+        <!-- end listScroll -->
+    </div>
+    <!-- footer -->
+    @Html.Partial("_FrontBottom", 2)
+    <!-- end footer -->
+    <!-- end viewport -->
+    <script src="/Scripts/js/zepto.js"></script>
+    <script src="/Scripts/js/gmu.js"></script>
+    <script src="/Scripts/js/slide-touch.js"></script>
+</body>
+</html>

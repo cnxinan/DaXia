@@ -1,0 +1,43 @@
+﻿@{
+    string indexAct = string.Empty;
+    string catalogsAct = string.Empty;
+    string newProcessAct = string.Empty;
+    string loveAct = string.Empty;
+    string personalAct = string.Empty;
+
+    switch ((int)Model)
+    {
+        case 0:
+            indexAct = "active";
+            break;
+        case 1:
+            catalogsAct = "active";
+            break;
+        case 2:
+            newProcessAct = "active";
+            break;
+        case 3:
+            loveAct = "active";
+            break;
+        case 4:
+            personalAct = "active";
+            break;
+    }
+}
+<footer class="footer">
+    <a class="footer-link @indexAct" href="/FrontPerson/Director">
+        <span class="home"></span>首页
+    </a>
+    <a class="footer-link @catalogsAct" href="/FrontPerson/MyDirector">
+        <span class="allList"></span>粉丝团
+    </a>
+    <a class="footer-link @newProcessAct" href="/FrontPerson/MyOrder">
+        <span class="newsAnnounced"></span>我的订单
+    </a>
+    <a class="footer-link @loveAct" href="/FrontPerson/MyBank">
+        <span class="cart"></span>我的银行
+    </a>
+    <a class="footer-link @personalAct" href="/FrontPerson/TX">
+        <span class="personalCenter"></span>提现
+    </a>
+</footer>

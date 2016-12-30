@@ -1,0 +1,140 @@
+﻿@{
+    Layout = null;
+}
+@model KCPS.WebComAdmin.Front.HomeIndexVM
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>果战士商城</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+</head>
+<body>
+    <!-- viewport -->
+    <div class="viewport">
+        <!-- section -->
+        <div class="section">
+            <div class="slider">
+                @foreach (var ad in Model.ads)
+                {
+                    <div><a href="@ad.adUrl"><img src="@ad.adImage"></a></div>
+                }
+            </div>
+            <nav class="nav">
+                <a class="nav-link" href="/FrontProduct/Catalogs">
+                    <img src="/images/icon-nav-link01.png" alt="全部礼品">
+                    <span>全部礼品</span>
+                </a>
+                <a class="nav-link" href="/FrontHome/LatestRewardRecord">
+                    <img src="/images/icon-nav-link02.png" alt="最新揭晓">
+                    <span>最新揭晓</span>
+                </a>
+                <a class="nav-link" href="/FrontPerson/UserJoin">
+                    <img src="/images/icon-nav-link03.png" alt="加入我们">
+                    <span>时尚代言人</span>
+                </a>
+                <a class="nav-link" href="/FrontPerson/RechargeView">
+                    <img src="/images/icon-nav-link04.png" alt="在线充值">
+                    <span>在线充值</span>
+                </a>
+            </nav>
+        </div>
+        <!-- end section -->
+        <!-- listScroll -->
+        <div class="listScroll">
+            <ul id="contentDom">
+                @foreach (var product in Model.products)
+                {
+                    string active = product.IsBookMark ? "active" : string.Empty;
+
+                    <li>
+                        <div class="section seckill clearfix">
+                            <div class="bgimg">
+                                <span class="logo">
+                                    <a href="/FrontProduct/Product?id=@product.productId"><img src="@product.icoImage"></a>
+                                </span>
+                                <a href="/FrontProduct/Product?id=@product.productId"><img src="@product.productIamge"></a>
+                                <span class="seckill">@*<img src="images/icon-seckill.png">*@</span>
+                                <div class="number">
+                                    <div class="strip"><span class="strip-color" style="width:@product.processedPercent;"></span></div>
+                                    <span class="textleft">已参与：@product.haveActNumbers</span>
+                                    <span>总需人次：@product.actNumbers</span>
+                                    <span class="textright">剩余：@product.remainActNumbers</span>
+                                </div>
+                            </div>
+                            <p class="titleText"><a href="/FrontProduct/Product?id=@product.productId">@product.productName</a></p>
+                            <p class="follow">
+                                <span class="bookMark @active" onclick="BookMark('@product.productId')"></span>
+                                @product.bookMarkNumbers<br>关注
+                            </p>
+                        </div>
+                    </li>
+                }
+            </ul>
+            <input type="hidden" name="pageIndex" id="pageIndex" value="@Model.currentPage" />
+            <input type="hidden" name="pageTotal" id="pageTotal" value="@Model.totalPage" />
+            <div id="LoadingMsg">
+                <span>正在加载</span>
+            </div>
+        </div>
+        <!-- end listScroll -->
+    </div>
+    <!-- footer -->
+    @Html.Partial("_FrontBottom", 0)
+    <!-- end footer -->
+    <!-- end viewport -->
+    <script src="/Scripts/js/zepto.js"></script>
+    <script src="/Scripts/js/gmu.js"></script>
+    <script src="/Scripts/js/slide-touch.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(window).scroll(function () {
+                var totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());//浏览器的高度加上滚动条的高度
+                if ($(document).height() <= totalheight)//当文档的高度小于或者等于总的高度的时候，开始动态加载数据
+                {
+                    var pageIndex = parseInt($('#pageIndex').val())+1;
+                    var pageTotal = parseInt($('#pageTotal').val());
+                    if (pageTotal > pageIndex) {
+                        $('#LoadingMsg').css('display', 'block');
+                        $.ajax({
+                            type: 'post',
+                            dataType: 'text',
+                            data: 'pageIndex=' + pageIndex,
+                            url: '/FrontHome/Ajax_AdPoductWithPage',
+                            success: function (data) {
+                                $('#contentDom').append(data);
+                                $('#pageIndex').val(pageIndex);
+                            }
+                        });
+                    }
+
+                    $('#LoadingMsg').css('display', 'none');
+                } else {
+                    $('#LoadingMsg').css('display', 'none');
+                }
+            });
+        })
+
+        function BookMark(id) {
+            $.ajax({
+                type: 'post',
+                dataType: 'text',
+                data: 'id=' + id,
+                url: '/FrontHome/Ajax_Follow',
+                success: function (data) {
+                    alert(data);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

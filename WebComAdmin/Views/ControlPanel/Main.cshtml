@@ -1,0 +1,93 @@
+﻿@model KCPS.WebComAdmin.HomeVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Main</title>
+    <link href="/css/skin1/global.css" rel="stylesheet" type="text/css">
+    <link href="/css/skin1/right.css" rel="stylesheet" type="text/css">
+    <link href="/css/skin1/main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页</a></li>
+        </ul>
+    </div>
+
+    <div class="mainindex">
+        <div class="welinfo">
+            <span>
+                <b>@Model.UserName 早上好，欢迎使用摇一摇后台管理系统。</b>
+            </span>
+            <span><img src="/images/270.gif" alt="时间" /></span>
+            <i>您上次登录的时间：@Model.LoginTime 登录IP是:@Model.LoginIp</i> （不是您登录的？<a href="/ControlPanelSetting/ResetPassword">请点这里</a>）
+        </div>
+
+        <div class="xline"></div>
+
+        <ul class="iconlist" style="display:none">
+            <li>
+                <img src="/images/ico01.png" /><p><a href="Main" target="_self">查看首页</a></p>
+            </li>
+            <li>
+                <img src="/images/ico02.png" /><p><a href="/Member/UnCheckedUser">报单审核</a></p>
+            </li>
+            <li>
+                <img src="/images/ico03.png" /><p><a href="#">数据统计</a></p>
+            </li>
+            <li>
+                <img src="/images/ico04.png" /><p><a href="#">文件上传</a></p>
+            </li>
+            <li>
+                <img src="/images/ico05.png" /><p><a href="#">目录管理</a></p>
+            </li>
+            <li>
+                <img src="/images/ico06.png" /><p><a href="#">查询</a></p>
+            </li>
+        </ul>
+
+        <div class="box"></div>
+
+        <div class="welinfo" style="float:left;width:50%;">
+            <span>
+                <img src="/images/ico02.png" alt="提醒" />
+            </span>
+            <b>快捷操作</b>
+        </div>
+
+        <div class="welinfo">
+            <span>
+                <img src="/images/ico03.png" alt="统计" />
+            </span>
+            <b>数据统计</b>
+        </div>
+
+        <div class="clearboth"></div>
+
+        <ul class="infolist" style="float:left;width:50%">
+            <li><span>快捷方式：产品管理</span> <a href="/ControlPanelProduct/Products" class="ibtn">产品管理</a></li>
+            <li><span>快捷方式：商户管理</span> <a href="/ControlPanelMember/Shops" class="ibtn">商户管理</a></li>
+            <li><span>快捷方式：所有订单</span> <a href="/Member/AllUsers" class="ibtn">所有订单</a></li>
+            <li><span>快捷方式：中奖信息</span> <a href="/SystemSetting/Notices" class="ibtn">中奖信息</a></li>
+        </ul>
+
+        <ul class="infolist">
+            <li><a href="/ControlPanelMember/Shops" class="AClass">全部商户</a>:<strong>100</strong>家</li>
+            <li><a href="/ControlPanelProduct/Products" class="AClass">全部产品</a>:<strong>100</strong>个</li>
+            <li><a href="/Member/UnCheckedUser" class="AClass">全部订单</a>:<strong>100</strong>条</li>
+            <li><a href="/Member/UnCheckedUser" class="AClass">未配送订单</a>:<strong>200</strong>条</li>
+            <li><a href="#" class="AClass">已配送订单</a>:<strong>1100</strong>个</li>
+        </ul>
+
+        <div class="clearboth"></div>
+        <div class="xline"></div>
+    </div>
+</body>
+</html>

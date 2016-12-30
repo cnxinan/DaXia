@@ -1,0 +1,96 @@
+﻿@{
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我要充值</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+    <script type="text/javascript">
+
+        function callpay()
+        {
+            if (typeof WeixinJSBridge == "undefined")
+            {
+                if (document.addEventListener)
+                {
+                    document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                }
+                else if (document.attachEvent)
+                {
+                    document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                    document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                }
+            }
+            else
+            {
+                jsApiCall();
+            }
+        }
+
+        //调用微信JS api 支付
+        function jsApiCall()
+        {
+            WeixinJSBridge.invoke(
+            'getBrandWCPayRequest',
+             @Html.Raw(ViewBag.wxJsApiParam),//josn串
+             function (res)
+             {
+                 WeixinJSBridge.log(res.err_msg);
+                 alert(res.err_code + res.err_desc + res.err_msg);
+             }
+             );
+        }      
+
+    </script>
+</head>
+
+
+<body>
+    <!-- viewport -->
+    <div class="viewport">
+        <!-- headerTop -->
+        <div class="headerTop">
+            <a href="javascript:history.go(-1);"><span class="return">返回</span></a>充值
+        </div>
+        <!-- end headerTop -->
+        <!-- recharge -->
+        <div class="recharge clearfix">
+            <p>您当前的余额：<font class="color">30.00元</font></p>
+            <span class="active">30元</span>
+            <span>50元</span>
+            <span>100元</span>
+            <span>200元</span>
+            <span>300元</span>
+            <span>500元</span>
+            <input type="text" name="money" placeholder="请输入其他金额">
+            <div class="payment">
+                <p>选择在线充值：<font class="color">30.00元</font></p>
+                <p><input type="checkbox" name="checkbox" checked>微信支付</p>
+            </div>
+        </div>
+        <!-- end recharge -->
+        <!-- confirmRecharge -->
+        <div class="confirmRecharge">
+            <a href="">客服热线</a>
+            <a href="">新手指南</a>
+            <button class="active" onclick="callpay()">确认充值</button>
+        </div>
+        <!-- end confirmRecharge -->
+    </div>
+    <!-- end viewport -->
+    <script src="/Scripts/js/zepto.js"></script>
+    <script src="/Scripts/js/gmu.js"></script>
+    <script src="/Scripts/js/slide-touch.js"></script>
+</body>
+</html>

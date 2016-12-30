@@ -1,0 +1,27 @@
+﻿@{
+    Layout = null;
+}
+
+@model KCPS.WebComAdmin.Front.HomeProduct
+<li>
+    <div class="section seckill clearfix">
+        <div class="bgimg">
+            <span class="logo">
+                <a href="/FrontProduct/Product?id=@Model.productId"><img src="@Model.icoImage"></a>
+            </span>
+            <a href="/FrontProduct/Product?id=@Model.productId"><img src="@Model.productIamge"></a>
+            <span class="seckill"><img src="images/icon-seckill.png"></span>
+            <div class="number">
+                <div class="strip"><span class="strip-color" style="width:@Model.processedPercent;"></span></div>
+                <span class="textleft">已参与：@Model.haveActNumbers</span>
+                <span>总需人次：@Model.actNumbers</span>
+                <span class="textright">剩余：@Model.remainActNumbers</span>
+            </div>
+        </div>
+        <p class="titleText"><a href="">@Model.productName</a></p>
+        <p class="follow">
+            <span class="bookMark @Model" onclick="BookMark('@Model.productId')"></span>
+            @Model.bookMarkNumbers<br>关注
+        </p>
+    </div>
+</li>

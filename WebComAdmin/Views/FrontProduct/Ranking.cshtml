@@ -1,0 +1,60 @@
+﻿@{
+    Layout = null;
+}
+@model KCPS.WebComAdmin.Front.RankListVM
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>摇一摇排行榜</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+</head>
+<body>
+    <!-- viewport -->
+    <div class="viewport">
+        <div class="ranking">
+            <ul class="rankingList">
+                <li class="clearfix">
+                    <div class="rankingFirst">排名</div>
+                    <div class="rankingCenter">昵称</div>
+                    <div class="rankingLast">得分</div>
+                </li>
+                @foreach (var item in Model.itemList)
+                {
+                    <li class="clearfix">
+                        <div class="rankingFirst @item.styleStr"><span>@item.rankOrder</span></div>
+                        <div class="rankingCenter ">
+                            <div class="rankingLogo">
+                                <img src="@item.headImg">
+                            </div>
+                            @item.nickName
+                        </div>
+                        <div class="rankingLast">@item.score</div>
+                    </li>
+                }
+            </ul>
+            @if (Model.bestRank > 0)
+            {
+                <p>我的最好名次：@Model.bestRank 名</p>
+            }
+            else
+            {
+                <p>您尚未参与!</p> 
+            }
+        </div>
+    </div>
+    <!-- footer -->
+    @Html.Partial("_FrontBottom", 2)
+    <!-- end footer -->
+    <!-- end viewport -->
+</body>
+</html>

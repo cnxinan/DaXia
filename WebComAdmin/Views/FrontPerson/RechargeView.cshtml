@@ -1,0 +1,233 @@
+﻿@{
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我要充值</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+    <script type="text/javascript">
+        function immediately() {
+            var element = document.getElementById("mytext");
+            if ("\v" == "v") {
+                element.onpropertychange = webChange;
+            } else {
+                element.addEventListener("input", webChange, false);
+            }
+            function webChange() {
+                if (isNaN(element.value)) {
+                    document.getElementById("test").innerHTML = "1";
+
+                } else {
+                    document.getElementById("test").innerHTML = element.value;
+
+                }
+            }
+        }
+
+    </script>
+</head>
+
+<style type="text/css">
+    /* choose */
+    .choose {
+        text-align: center;
+    }
+
+    .choosetext {
+        height: 24px;
+        padding: 20px 0;
+        font-size: 14px;
+    }
+
+    .choosebox {
+        padding: 0 0 25px 0;
+        background: #fff;
+    }
+
+    .sumzong {
+        color: Red;
+    }
+
+    .choosebox li a {
+        float: left;
+        display: inline-block;
+        width: 29%;
+        padding: 10px 0;
+        margin: 3% 0 0 3.3%;
+        border: 1px solid #e64859;
+        border-radius: 3px;
+        text-align: center;
+        color: #e64859;
+    }
+
+        .choosebox li a.current {
+            background: url(/images/right-icon.gif) no-repeat 100% 100%;
+            border: 1px solid #A10000;
+        }
+
+    .choosebox li input {
+        display: none;
+    }
+
+    .choose .btn-img {
+        width: 160px;
+        height: 50px;
+        overflow: hidden;
+        background: url(/images/cart.gif) no-repeat;
+        cursor: pointer;
+        border: 0;
+    }
+
+        .choose .btn-img span {
+            display: block;
+            font-size: 18px;
+            font-weight: 800;
+            color: #fff;
+            font-family: "微软雅黑","宋体";
+            padding: 0 0 0 50px;
+            line-height: 50px;
+        }
+
+    .choosebox input[type="text"] {
+        width: 94%;
+        background: #fff;
+        border: 1px solid #e64859;
+        border-radius: 3px;
+        padding: 10px;
+        margin: 3% 0 0 3%;
+        font-family: "Microsoft YaHei",Arial,Helvetica,sans-serif,Verdana,"Trebuchet MS","STXihei";
+    }
+
+    .payment1 {
+        background: #fff;
+        padding: 0 10px;
+        border-top: 1px solid #dadada;
+        border-bottom: 1px solid #dadada;
+        text-align: left;
+    }
+
+        .payment1 p {
+            padding: 10px 0;
+        }
+
+            .payment1 p:last-child {
+                border: none;
+            }
+</style>
+<body>
+    <!-- viewport -->
+    <div class="viewport">
+        <!-- headerTop -->
+        <div class="headerTop">
+            <a href="javascript:history.go(-1);"><span class="return">返回</span></a>充值
+        </div>
+        <!-- end headerTop -->
+        <!-- recharge -->
+        <form action="" method="get">
+
+            <div class="choosebox" style="@ViewBag.display">
+                <ul class="clearfix">
+                    <li>
+                        <input type="radio" name="name" value="1" id="" />
+                        <a href="javascript:void(0);" class="size_radioToggle">1</a>
+                    </li>
+                    <li>
+                        <input type="radio" name="name" value="10" id="" />
+                        <a href="javascript:void(0);" class="size_radioToggle">10</a>
+                    </li>
+                    <li>
+                        <input type="radio" name="name" value="20" id="" />
+                        <a href="javascript:void(0);" class="size_radioToggle">20</a>
+                    </li>
+                    <li>
+                        <input type="radio" name="name" value="50" id="" />
+                        <a href="javascript:void(0);" class="size_radioToggle">50</a>
+                    </li>
+                    <li>
+                        <input type="radio" name="name" value="100" id="" />
+                        <a href="javascript:void(0);" class="size_radioToggle">100</a>
+                    </li>
+                    <li>
+                        <input type="radio" name="name" value="200" id="Radio1" />
+                        <a href="javascript:void(0);" class="size_radioToggle">200</a>
+                    </li>
+                </ul>
+                <input type="text" name="textfield" id="mytext" @ViewBag.isreadonly value="@ViewBag.value" />
+                <script type="text/javascript">
+                    immediately();
+                </script>
+            </div>
+            <div class="payment1">
+                <div class="choosetext">选择在线充值：<span id="test" @ViewBag.isreadonly class="value">@ViewBag.value</span></div>
+                <p><input type="checkbox" name="checkbox" checked>微信支付</p>
+            </div>
+        </form>
+
+        <!-- end recharge -->
+        <!-- confirmRecharge -->
+        <div class="confirmRecharge">
+            <a href="">客服热线</a>
+            <a href="">新手指南</a>
+            <button class="active" onclick="ToPay()">确认充值</button>
+        </div>
+
+        <!--商户加盟费-->
+        <form id="formToPpay" action="/FrontPerson/Recharge/" method="post">
+            <input type="hidden" id="amount" name="amount" />
+            <input type="hidden" id="type" name="type" value="payforin" />
+        </form>
+        <!-- end confirmRecharge -->
+    </div>
+    <!-- end viewport -->
+    <script src="/Scripts/js/zepto.js"></script>
+    <script src="/Scripts/js/gmu.js"></script>
+    <script src="/Scripts/js/slide-touch.js"></script>
+    <script type="text/javascript">
+    $(function () {
+        $('.choosebox li a').click(function () {
+            var thisToggle = $(this).is('.size_radioToggle') ? $(this) : $(this).prev();
+            var checkBox = thisToggle.prev();
+            checkBox.trigger('click');
+            $('.size_radioToggle').removeClass('current');
+            thisToggle.addClass('current');
+            return false;
+        });
+    });
+
+    $(".choosebox li a").click(function () {
+        var text = $(this).html();
+        $(".choosetext span").html(text);
+        $("#result").html("" + getSelectedValue("dress-size"));
+    });
+
+    function getSelectedValue(id) {
+        return
+        $("#" + id).find(".choosetext span.value").html();
+    }
+
+    function ToPay() {
+        var amount = document.getElementById("test").innerHTML;
+        if (isNaN(amount) || amount < 0) {
+            alert("输入金额错误!");
+            return;
+        }
+
+        $("#amount").val(amount);
+        $("#type").val('@ViewBag.isreadonly');
+        $("#formToPpay").submit();
+    }
+
+    </script>
+</body>
+</html>

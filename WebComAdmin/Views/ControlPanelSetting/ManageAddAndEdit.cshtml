@@ -1,0 +1,74 @@
+﻿@model KCPS.WebComAdmin.AdminVM
+@using KCPS.WebFrameWork
+
+@{
+ int index = 0;   
+}
+<!--内容-开始-->
+<div id="RightContainer">
+    <!--当前-开始-->
+    <div class="CtrlDiv">
+        <div class="left">
+            <b>系统管理</b>>>添加管理员
+        </div>
+        <div class="right">
+            <a href="@SiteUrls.Instance.M_ManageAdmins()" class="backBtn backDefault" style="margin-right: 0px;">返回列表</a>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+    <!--当前-结束-->
+    <!--标签-开始-->
+    
+    <div class="TabDiv">
+        <table class="tabTable" cellspacing="0">
+            <tr>
+                <td class="itemTD cur">管理员信息</td> 
+            </tr>
+        </table>
+    </div>
+    <!--标签-结束-->
+    <!--表单-开始-->
+    @using (Html.BeginForm("ManageAddAndEdit", "SystemSetting", FormMethod.Post, new { onsubmit="return checkManage()" }))
+    {
+        @Html.HiddenFor(model => model.id)
+    <div class="AddEditDiv">
+        <table class="addTable ItemTable" cellspacing="2">
+            <tr>
+                <td class="ltd">用户名</td>
+                <td class="rtd">
+                    @Html.TextBoxFor(model => model.username)
+                    <span class="f12 Red">* 必填</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="ltd">登陆密码</td>
+                <td class="rtd">
+                    @Html.TextBoxFor(model => model.password)
+                    <span class="f12 Red">* 必填</span></td>
+            </tr>                    
+        </table>
+        <table class="addTable" cellspacing="2">
+            <tr>
+                <td class="ltd"></td>
+                <td class="rtd">
+                    <input type="submit" class="submitBtn submitDefault" value="确 定" />
+                    <input type="reset" class="cancelBtn cancelDefault" value="重 置" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    }
+    <!--表单-结束-->
+</div>
+<!--内容-结束-->
+@section scripts
+{
+    <script type="text/javascript">        
+        @Html.Raw(ViewBag.JS)
+
+        function checkManage() {
+            showWorking();
+            return true;
+        }
+    </script>
+    }

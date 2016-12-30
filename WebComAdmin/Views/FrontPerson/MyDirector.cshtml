@@ -1,0 +1,51 @@
+﻿@{
+    Layout = null;
+}
+@model KCPS.WebComAdmin.Front.MyDirectorVM
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的粉丝团</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+</head>
+<body>
+    <!-- viewport -->
+    <div class="viewport">
+        <div class="personalCenter">
+            <div class="withdrawalsOne clearfix">
+                <div class="withdrawalsLogo"><img src="@Model.headImg"></div>
+                <p>昵称：@Model.nickName</p>
+                <p>会员：是@*<a href="join.html">（点击链接成为会员）</a>*@</p>
+                <p>会员ID：@Model.userNo</p>
+
+                <span><a href="">帐号设置</a></span>
+                <ul class="directorUl clearfix">
+                    <li>销售额  @Model.sales 元</li>
+                    <li>我的奖励 @Model.bonus 元</li>
+                </ul>
+            </div>
+            <!-- director -->
+            <div class="director">
+                <ul>
+                    <li>我是粉丝团长</li>
+                    <li>粉丝排长<span>（@Model.level1Count）</span></li>
+                    <li>粉丝班长<span>（@Model.level2Count）</span></li>
+                    <li>小粉丝<span>（@Model.level3Count）</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_ShopFooter", 1)
+    <!-- end viewport -->
+</body>
+</html>

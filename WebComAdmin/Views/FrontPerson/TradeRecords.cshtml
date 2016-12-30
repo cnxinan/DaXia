@@ -1,0 +1,89 @@
+﻿@{
+    Layout = null;
+}
+@model KCPS.WebComAdmin.Front.TradeListVM
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>账户明细</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+</head>
+<body>
+    <!-- viewport -->
+    <div class="viewport">
+        <!-- headerTop -->
+        <div class="headerTop">
+            <a href="javascript:history.go(-1);"><span class="return">返回</span></a>帐号明细
+        </div>
+        <!-- end headerTop -->
+        <!-- accountDetails -->
+        <div class="accountDetails">
+            <p>您当前的余额：<font class="color">@Model.balance 元</font><a href="/FrontPerson/RechargeView">去充值</a></p>
+            <ul class="accountDetailsUl clearfix">
+                <li class="active first">
+                    <span class="accountDetailsImga">消费明细</span>
+                    <span>消费总金额：<b>￥@Model.shackTotal</b></span>
+                </li>
+                <li>
+                    <span class="accountDetailsImgb">充值明细</span>
+                    <span>充值总金额：<b>￥@Model.rechargeTotal</b></span>
+                </li>
+            </ul>
+            <div class="accountDetailsBtm">
+                <div class="accountDetailsCont" style="display:block;">
+                    <ul>
+                        <li>时　间</li>
+                        <li>金　额</li>
+                        <li>订单号</li>
+                    </ul>
+                    @foreach (var item in Model.shackItems)
+                    {
+                        <ul>
+                            <li>@item.creationDate</li>
+                            <li><b>￥@item.totalfee</b></li>
+                            <li>@item.tradeNo</li>
+                        </ul>
+                    }                    
+                </div>
+                <div class="accountDetailsCont">
+                    <ul>
+                        <li>时　间</li>
+                        <li>金　额</li>
+                        <li>订单号</li>
+                    </ul>
+                    @foreach(var item in Model.rechargeItems)
+                    { 
+                    <ul>
+                        <li>@item.creationDate</li>
+                        <li><b>￥@item.totalfee</b></li>
+                        <li>@item.tradeNo</li>
+                    </ul>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- end accountDetails -->
+        <!-- confirmRecharge -->
+        <div class="confirmRecharge">
+            <a href="">客服热线</a>
+            <a href="">新手指南</a>
+        </div>
+        <!-- end confirmRecharge -->
+    </div>
+    <!-- end viewport -->
+    <script src="/Scripts/js/zepto.js"></script>
+    <script src="/Scripts/js/gmu.js"></script>
+    <script src="/Scripts/js/slide-touch.js"></script>
+</body>
+</html>

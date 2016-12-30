@@ -1,0 +1,107 @@
+﻿@model KCPS.WebComAdmin.TxAccountListVM
+
+<!--内容-开始-->
+<div id="RightContainer">
+    <!--当前-开始-->
+    <div class="CtrlDiv">
+        <div class="left"><b>账户管理</b> >> 提现订单</div>
+        <div class="right">
+            @*<a class="addBtn addDefault" href="@SiteUrls.Instance.M_DiningAddAndEdit()">添加餐厅</a>*@
+            <a href="javascript:;" onclick="location.replace(location.href);" class="refreshBtn refreshDefault" style="margin-right: 0px;">刷新本页</a>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+    <!--当前-结束-->
+    <!--筛选-开始-->
+    <div class="FilterDiv">
+        <table class="fTable" cellspacing="0">
+            <tr>
+                <td class="itemTD">订单号：</td>
+                <td class="itemSP">
+                    <input name="userNo" id="userNo" type="text" class="smalltxt" onkeydown="if(event.keyCode==13){document.getElementById('SearchBtn').click();return false;}" />
+                </td>
+                <td class="itemTD">OpenId：</td>
+                <td class="itemSP">
+                    <input name="userName" id="userName" type="text" class="smalltxt" onkeydown="if(event.keyCode==13){document.getElementById('SearchBtn').click();return false;}" />
+                </td>
+                <td>
+                    <input type="button" value="搜 索" id="SearchBtn" class="searchBtn searchDefault" onclick="Search()" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!--筛选-结束-->
+    <div class="DataDiv">
+        <div class="div100 m10">
+            <table class="dataTable" cellspacing="1">
+                <thead>
+                    <tr>
+                        <th style="width: 40px;">序号</th>
+                        <th style="width: 120px;">订单号</th>
+                        <th style="width: 200px;">OpenId</th>
+                        <th style="width: 80px;">金额</th>
+                        <th style="width: 80px;">联系人</th>
+                        <th style="width: 80px;">联系电话</th>
+                        <th style="width: 120px;">联系地址</th>
+                        <th style="width: 40px;">状态</th>
+                        <th style="width: 150px;">创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int serialNo = 0;}
+                    @foreach (var item in Model.itemList)
+                    {
+                        serialNo++;
+                        <tr>
+                            <td>@serialNo</td>
+                            <td>@item.OrderNo</td>
+                            <td>@item.OpenId</td>
+                            <td>@item.Amount</td>
+                            <td>@item.Contacts</td>
+                            <td>@item.Mobile</td>
+                            <td>@item.Address</td>
+                            <td>@item.Status</td>
+                            <td>@item.CreationTime</td>
+                            <td>
+                                @if (!item.IsCheced)
+                                {
+                                    <a href="javascript:tx('@item.ID')" class="AClass">审核</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @Html.Partial("PartialPaper", Model.page)
+    </div>
+</div>
+<!--内容-结束-->
+@section scripts
+{
+    <script type="text/javascript">
+        function Search() {
+
+        }
+
+        function tx(id) {
+            if (confirm('请确认已提现成功!')) {
+                $.ajax({
+                    type: "POST",
+                    url: "/ControlPanelFinance/_AjaxTXSuccess",
+                    data: { id: id },
+                    success: function (data) {
+                        alert(data);
+                        location.reload();
+                    }
+                });
+            }
+        }
+    </script>
+}
+
+
+
+
+

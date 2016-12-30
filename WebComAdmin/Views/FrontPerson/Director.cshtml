@@ -1,0 +1,54 @@
+﻿@{
+    Layout = null;
+}
+@model KCPS.WebComAdmin.Front.DirectorVM
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>果战士代言</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/css/front/common.css" />
+    <link rel="stylesheet" href="/css/front/style.css" />
+</head>
+<body>
+    <!-- viewport -->
+    <div class="viewport">
+        <div class="personalCenter">
+            <div class="withdrawalsOne clearfix">
+                <div class="withdrawalsLogo"><img src="@Model.headImg"></div>
+                <p>昵称：@Model.nickName</p>
+                <p>会员：是@*<a href="">（点击链接成为会员）</a>*@</p>
+                <p>会员ID：@Model.userNo</p>
+                @*<p>积分：0</p>*@
+                @*<span><a href="">帐号设置</a></span>*@
+                <ul class="directorUl clearfix">
+                    <li>销售额 @Model.sales 元</li>
+                    <li>我的奖励 @Model.bonus 元</li>
+                </ul>
+            </div>
+            <!-- director -->
+            <div class="director">
+                <p>你是由<b class="color">@Model.referrer</b>推荐的</p>
+                <ul>
+                    <li><a href="/FrontPerson/MyDirector">我是粉丝团长<span>（@Model.staffNum）</span><i class="icon-right"></i></a></li>
+                    <li><a href="">粉丝业绩<span>@Model.orderNum 单(￥@Model.bonus)</span><i class="icon-right"></i></a></li>
+                    <li><a href="/FrontPerson/MyBank">我的银行<span>@Model.sales 元</span><i class="icon-right"></i></a></li>
+                    <li><a href="/FrontPerson/TXOrder">申请提现<i class="icon-right"></i></a></li>
+                    <li><a href="/FrontPerson/MyOrder">我的订单<i class="icon-right"></i></a></li>
+                    <li><a href="/FrontPerson/Qrcode">我的二维码<i class="icon-right"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+   @Html.Partial("_ShopFooter", 0)
+    <!-- end viewport -->
+</body>
+</html>
