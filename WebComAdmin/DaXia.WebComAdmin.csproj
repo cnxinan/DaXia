@@ -744,6 +744,7 @@
     <Content Include="Views\ControlPanelOrder\BuyOrders.cshtml" />
     <Content Include="Views\FrontPerson\BuyOrderDetail.cshtml" />
     <Content Include="Views\ControlPanelProduct\ProductImgs.cshtml" />
+    <Content Include="Views\ControlPanelMember\Captcha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\kindeditor-4.1.10\attached\" />

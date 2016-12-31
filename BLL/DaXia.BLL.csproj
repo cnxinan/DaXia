@@ -150,7 +150,6 @@
     <Compile Include="..\WebComAdmin\Properties\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Base_bll.cs" />
     <Compile Include="MemberAccount_bll.cs" />
     <Compile Include="Log_bll.cs" />
     <Compile Include="AdInfo_bll.cs" />
