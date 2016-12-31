@@ -147,13 +147,15 @@ namespace DaXia.SQLServerDAL
             return db.Fetch<T>(sqlWhere);
         }
 
-        public List<T> Pages<T>(out long totalPage, out long totalItems,long page, long itemsPerPage, string sqlCondition, params object[] args)
+        public List<T> Pages<T>(string strWhere, long currentPage, long itemsPerPage, out long totalPages, out long totalItems, params object[] objects)
         {
-            var pageModel = db.Page<T>(page, itemsPerPage, sqlCondition, args);
-            totalPage = pageModel.TotalPages;
-            totalItems = pageModel.TotalItems;
 
-            return pageModel.Items;
+            var page = db.Page<T>(currentPage, itemsPerPage, strWhere, objects);
+
+            totalPages = page.TotalPages;
+            totalItems = page.TotalItems;
+
+            return page.Items;
         }
 
         #endregion               
