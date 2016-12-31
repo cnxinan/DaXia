@@ -1,10 +1,9 @@
-﻿@model DaXia.WebComAdmin.MemberListVM
-
+﻿@model DaXia.WebComAdmin.AdInfoListVM
 <!--内容-开始-->
 <div id="RightContainer">
     <!--当前-开始-->
     <div class="CtrlDiv">
-        <div class="left"><b>会员管理</b> >> 用户管理</div>
+        <div class="left"><b>系统管理</b> >> 日志管理</div>
         <div class="right">
             <a href="javascript:;" onclick="location.replace(location.href);" class="refreshBtn refreshDefault" style="margin-right: 0px;">刷新本页</a>
         </div>
@@ -15,10 +14,8 @@
     <div class="FilterDiv">
         <table class="fTable" cellspacing="0">
             <tr>
-                <td class="itemTD">姓名：</td>
-                <td class="itemSP">
-                    <input name="userNo" id="userNo" type="text" class="smalltxt" onkeydown="if(event.keyCode==13){document.getElementById('SearchBtn').click();return false;}" />
-                </td>
+                <td class="itemTD">广告名称：</td>
+                <td class="itemSP"></td>
                 <td>
                     <input type="button" value="搜 索" id="SearchBtn" class="searchBtn searchDefault" onclick="Search()" />
                 </td>
@@ -32,14 +29,10 @@
                 <thead>
                     <tr>
                         <th style="width: 40px;">序号</th>
-                        <th style="width: 40px;">状态</th>
-                        <th style="width: 210px;">姓名</th>
-                        <th style="width: 80px;">微信名</th>
-                        <th style="width: 80px;">所属大侠</th>
-                        <th style="width: 80px;">个性签名</th>
-                        <th style="width: 100px;">地址管理</th>
-                        <th style="width: 120px;">关注时间</th>
-                        <th>操作</th>
+                        <th style="width: 300px;">日志内容</th>
+                        <th style="width: 60px;">操作人</th>
+                        <th style="width: 120px;">创建时间</th>
+                        <th style="width: 80px;">操作</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,13 +42,14 @@
                         serialNo++;
                         <tr>
                             <td>@serialNo</td>
-                            <td>@item.OpenId</td>
-                            <td>@item.WeChatName</td>
-                            <td><img src="@item.WeChatImage" /></td>
-                            <td>@item.Balance</td>
+                            <td>@item.AdName</td>
+                            <td>@item.AdUrl</td>
+                            <td><img width="50" height="50" src="@item.AdImage" /></td>
+                            <td>@item.Sort</td>
                             <td>@item.CreationTime</td>
                             <td>
-                                @*<a href="javascript:Lock('')" class="AClass">禁用</a>*@
+                                <a href="/ControlPanelSetting/AdAddEdit?id=@item.ID" class="AClass">删除</a>
+                                <a href="javascript:deleteAd(@item.ID)" class="AClass">删除</a>
                             </td>
                         </tr>
                     }
@@ -63,23 +57,32 @@
             </table>
         </div>
         @Html.Partial("PartialPaper", Model.page)
-        @*@Html.Partial("PartialPaper", Utility.pagedefault)*@
     </div>
 </div>
 <!--内容-结束-->
 @section scripts
 {
     <script type="text/javascript">
+        //搜索
         function Search() {
-            var userNo = $('#userNo').val();
-            location.href = '/ControlPanelMember/Members?userNo=' + userNo;
         }
 
-        function SchoolManage(id) {
-            ShowIdeaDialog("绑定学校", "<iframe frameborder='0' scrolling='no' width='100%' height='300' src='/Member/_bindSchool?id=" + id + "&type=130'></iframe>", "500", "300", false, "");
+        //禁用/启用管理
+        function loclOrUnlock() {
+        }
+
+        //删除管理
+        function deleteAd(id) {
+            $.ajax({
+                type: "POST",
+                url: "/ControlPanelSetting/_ajaxDeleteAd",
+                data: { id: id },
+                success: function (data) {
+                    alert(data);
+                    location.reload();
+                }
+            });
         }
     </script>
 }
-
-
 

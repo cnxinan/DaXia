@@ -101,6 +101,7 @@ namespace DaXia.WebComAdmin
                 Details = entity.Details,
                 SalesCount = entity.SalesCount.HasValue ? entity.SalesCount.Value : 0,
                 FakeSalesCount = entity.FakeSalesCount.HasValue ? entity.FakeSalesCount.Value : 0,
+                Stock = entity.Stock.HasValue ? entity.Stock.Value : 0,
                 MarketPrice = entity.MarketPrice.HasValue ? entity.MarketPrice.Value : 0M,
                 StockPrice = entity.StockPrice.HasValue ? entity.StockPrice.Value : 0M,
                 Sort = entity.Sort.HasValue ? entity.Sort.Value : 0,
@@ -128,6 +129,7 @@ namespace DaXia.WebComAdmin
         public string VideoLink { get; set; }
         public int Sort { get; set; }
         public string CreationTime { get; set; }
+        public int Stock { get; set; }
     }
 
     public class ProductImgListVM

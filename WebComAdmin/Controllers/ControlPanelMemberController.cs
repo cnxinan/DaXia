@@ -284,6 +284,44 @@ namespace DaXia.WebComAdmin
         }
         #endregion
 
+        #region 大侠管理
+        public ActionResult DaXias()
+        {
+            ShopListVM viewModel = new ShopListVM() { itemList = new List<ShopDetailsVM>() };
+
+            string strWhere = string.Format(" where 1=1");
+
+            #region 分页
+
+            long pageIndex = Utility.pageIndex;
+            if (Request["Page"] != null)
+            {
+                pageIndex = long.Parse(Request["Page"]);
+            }
+            long itemsPrePage = Utility.itemsPrePage;
+            long totalPages = 0;
+            long totalItems = 0;
+            string url = Request.Url.AbsolutePath + "?1=1";
+            if (Request["contact"] != null)
+            {
+                strWhere += string.Format(" and Contacts like '%{0}%'", Request["contact"]);
+            }
+            strWhere += " order by CreationTime DESC";
+            var itemList = shopbll.GetListPaging(strWhere, pageIndex, itemsPrePage, out totalPages, out totalItems);
+            viewModel.page = new Pager() { RecordAllCount = (int)totalItems, PageIndex = (int)pageIndex, PageAllCount = (int)totalPages, PageUrl = url };
+
+            #endregion
+
+            itemList.ForEach((p) =>
+            {
+                viewModel.itemList.Add(viewModel.ETV(p));
+            });
+
+            return View(viewModel);
+        }
+               
+        #endregion
+
         #region 用户管理
 
         public ActionResult Members()
@@ -359,8 +397,7 @@ namespace DaXia.WebComAdmin
 
             return View(viewModel);
         }
-
-
+        
         #endregion
 
         #region 私有方法

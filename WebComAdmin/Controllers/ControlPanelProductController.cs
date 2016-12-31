@@ -16,6 +16,7 @@ namespace DaXia.WebComAdmin.Controllers
         private readonly ProductType_bll _productTypeBll = BLLFactory.Instance.ProductTypeBll;
         private readonly ShopDetail_bll _shopDetialBll = BLLFactory.Instance.ShopDetailBll;
 
+        #region 产品类型
         public ActionResult ProductTypes()
         {
             ProductTypeListVM viewModel = new ProductTypeListVM() { itemList = new List<ProductTypeVM>() };
@@ -112,6 +113,10 @@ namespace DaXia.WebComAdmin.Controllers
 
             return View(model);
         }
+
+        #endregion
+
+        #region 产品分类
 
         public ActionResult ProductCatalogs()
         {
@@ -227,6 +232,10 @@ namespace DaXia.WebComAdmin.Controllers
             return View(model);
         }
 
+        #endregion
+
+        #region 产品
+
         public ActionResult Products()
         {
             ProductListVM viewModel = new ProductListVM() { itemList = new List<ProductVM>() };
@@ -285,6 +294,7 @@ namespace DaXia.WebComAdmin.Controllers
                     model.Specifications = entity.Specifications;
                     model.VideoLink = entity.VideoLink;
                     model.Sort = entity.Sort.HasValue ? entity.Sort.Value : 0;
+                    model.Stock = entity.Stock.HasValue ? entity.Stock.Value : 0;
                 }
             }
             else
@@ -323,6 +333,7 @@ namespace DaXia.WebComAdmin.Controllers
                 entity.Specifications = model.Specifications;
                 entity.VideoLink = model.VideoLink;
                 entity.Sort = model.Sort;
+                entity.Stock = model.Stock;
                 entity.CreationTime = DateTime.Now;
 
                 if (_productBll.Insert(entity))
@@ -359,6 +370,7 @@ namespace DaXia.WebComAdmin.Controllers
                     entity.Specifications = model.Specifications;
                     entity.VideoLink = model.VideoLink;
                     entity.Sort = model.Sort;
+                    entity.Stock = model.Stock;
 
                     if (_productBll.Update(entity))
                     {
@@ -376,6 +388,9 @@ namespace DaXia.WebComAdmin.Controllers
             return View(model);
         }
 
+        #endregion
+
+        #region Ajax 处理
         public ActionResult _ajaxStartShack(Guid id)
         {
             string result = "该产品已开始抽奖";
@@ -441,6 +456,7 @@ namespace DaXia.WebComAdmin.Controllers
 
             return Content(result);
         }
+        #endregion
 
         #region 产品多图
 

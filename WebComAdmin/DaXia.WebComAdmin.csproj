@@ -745,6 +745,12 @@
     <Content Include="Views\FrontPerson\BuyOrderDetail.cshtml" />
     <Content Include="Views\ControlPanelProduct\ProductImgs.cshtml" />
     <Content Include="Views\ControlPanelMember\Captcha.cshtml" />
+    <Content Include="Views\ControlPanelMember\DaXias.cshtml" />
+    <Content Include="Views\ControlPanelFinance\AssignIncome.cshtml" />
+    <Content Include="Views\ControlPanelSetting\ManageBackups.cshtml" />
+    <Content Include="Views\ControlPanelSetting\ManageAdvise.cshtml" />
+    <Content Include="Views\ControlPanelSetting\ManageLogs.cshtml" />
+    <Content Include="Views\ControlPanelSetting\AccountBackups.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\kindeditor-4.1.10\attached\" />

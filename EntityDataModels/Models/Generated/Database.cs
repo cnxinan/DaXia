@@ -297,6 +297,7 @@ namespace DaXia.EntityDataModels
 		[Column] public string VideoLink { get; set; }
 		[Column] public int? Sort { get; set; }
 		[Column] public DateTime? CreationTime { get; set; }
+		[Column] public int? Stock { get; set; }
 	}
     
 	[TableName("ProductCatalog")]

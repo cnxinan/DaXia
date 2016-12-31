@@ -71,7 +71,7 @@ namespace DaXia.WebFrameWork
             {
                 url = UrlHelper.GenerateUrl(routeName, null, null, routeParameters, RouteTable.Routes, requestContext, false);
             }
-            catch (Exception e)
+            catch
             {
                 url = string.Empty;
             }

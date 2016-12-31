@@ -386,6 +386,41 @@ namespace DaXia.WebComAdmin
 
         #endregion
 
+        #region 账户管理
+
+        public ActionResult AccountBackups()
+        {
+            AdInfoListVM viewModel = new AdInfoListVM() { itemList = new List<AdInfoVM>() };
+
+            string strWhere = string.Format(" where 1=1 ");
+
+            #region 分页
+
+            long pageIndex = Utility.pageIndex;
+            if (Request["Page"] != null)
+            {
+                pageIndex = long.Parse(Request["Page"]);
+            }
+            long itemsPrePage = Utility.itemsPrePage;
+            long totalPages = 0;
+            long totalItems = 0;
+            string url = Request.Url.AbsolutePath + "?1=1";
+            strWhere += " order by Sort ASC";
+            var itemList = adInfoBll.GetListPaging(strWhere, pageIndex, itemsPrePage, out totalPages, out totalItems, currentUser.Username);
+            viewModel.page = new Pager() { RecordAllCount = (int)totalItems, PageIndex = (int)pageIndex, PageAllCount = (int)totalPages, PageUrl = url };
+
+            #endregion
+
+            itemList.ForEach((p) =>
+            {
+                viewModel.itemList.Add(viewModel.ETV(p));
+            });
+
+            return View(viewModel);
+        }
+
+        #endregion
+
         #region 备份管理
 
         public ActionResult ManageBackups()
@@ -423,9 +458,71 @@ namespace DaXia.WebComAdmin
 
         #region 意见管理
 
+        public ActionResult ManageAdvise()
+        {
+            AdInfoListVM viewModel = new AdInfoListVM() { itemList = new List<AdInfoVM>() };
+
+            string strWhere = string.Format(" where 1=1 ");
+
+            #region 分页
+
+            long pageIndex = Utility.pageIndex;
+            if (Request["Page"] != null)
+            {
+                pageIndex = long.Parse(Request["Page"]);
+            }
+            long itemsPrePage = Utility.itemsPrePage;
+            long totalPages = 0;
+            long totalItems = 0;
+            string url = Request.Url.AbsolutePath + "?1=1";
+            strWhere += " order by Sort ASC";
+            var itemList = adInfoBll.GetListPaging(strWhere, pageIndex, itemsPrePage, out totalPages, out totalItems, currentUser.Username);
+            viewModel.page = new Pager() { RecordAllCount = (int)totalItems, PageIndex = (int)pageIndex, PageAllCount = (int)totalPages, PageUrl = url };
+
+            #endregion
+
+            itemList.ForEach((p) =>
+            {
+                viewModel.itemList.Add(viewModel.ETV(p));
+            });
+
+            return View(viewModel);
+        }
+
         #endregion
 
         #region 日志管理
+
+        public ActionResult ManageLogs()
+        {
+            AdInfoListVM viewModel = new AdInfoListVM() { itemList = new List<AdInfoVM>() };
+
+            string strWhere = string.Format(" where 1=1 ");
+
+            #region 分页
+
+            long pageIndex = Utility.pageIndex;
+            if (Request["Page"] != null)
+            {
+                pageIndex = long.Parse(Request["Page"]);
+            }
+            long itemsPrePage = Utility.itemsPrePage;
+            long totalPages = 0;
+            long totalItems = 0;
+            string url = Request.Url.AbsolutePath + "?1=1";
+            strWhere += " order by Sort ASC";
+            var itemList = adInfoBll.GetListPaging(strWhere, pageIndex, itemsPrePage, out totalPages, out totalItems, currentUser.Username);
+            viewModel.page = new Pager() { RecordAllCount = (int)totalItems, PageIndex = (int)pageIndex, PageAllCount = (int)totalPages, PageUrl = url };
+
+            #endregion
+
+            itemList.ForEach((p) =>
+            {
+                viewModel.itemList.Add(viewModel.ETV(p));
+            });
+
+            return View(viewModel);
+        }
 
         #endregion
 
@@ -433,7 +530,7 @@ namespace DaXia.WebComAdmin
         /// 根据ViweModel获取需要插入的实体类
         /// </summary>
         /// <returns></returns>
-        
+
         private Manager GetManagerModel(AdminVM model)
         {
             Manager insertModel = new Manager();

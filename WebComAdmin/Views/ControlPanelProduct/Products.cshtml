@@ -36,8 +36,11 @@
                         <th style="width: 40px;">类别</th>
                         <th style="width: 120px;">名称</th>
                         <th style="width: 120px;">封面</th>
-                        <th style="width: 40px;">市场价</th>
-                        <th style="width: 40px;">进货价</th>
+                        <th style="width: 40px;">销售价</th>
+                        <th style="width: 40px;">成本价</th>
+                        <th style="width: 40px;">显示销量</th>
+                        <th style="width: 40px;">实际销量</th>
+                        <th style="width: 40px;">库存</th>
                         <th style="width: 40px;">排序</th>
                         <th style="width: 40px;">多图</th>
                         <th style="width: 120px;">创建时间</th>
@@ -56,6 +59,9 @@
                             <td><img src="@item.Image" width="50" height="50" /></td>
                             <td>@item.MarketPrice</td>
                             <td>@item.StockPrice</td>
+                            <td>@item.FakeSalesCount</td>
+                            <td>@item.SalesCount</td>
+                            <td>@item</td>
                             <td>@item.Sort</td>
                             <td><a class="AClass" href="/ControlPanelProduct/ProductImgs?id=@item.Id">查看</a></td>
                             <td>@item.CreationTime</td>

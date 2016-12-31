@@ -144,6 +144,59 @@ namespace DaXia.WebComAdmin.Controllers
             return View(viewModel);
         }
 
+        #region 分配收益
+
+        public ActionResult AssignIncome()
+        {
+            TxAccountListVM viewModel = new TxAccountListVM()
+            {
+                itemList = new List<TxAccountVM>()
+            };
+
+            string strWhere = string.Format(" where 1=1");
+
+            #region 分页
+
+            long pageIndex = Utility.pageIndex;
+            if (Request["Page"] != null)
+            {
+                pageIndex = long.Parse(Request["Page"]);
+            }
+            long itemsPrePage = Utility.itemsPrePage;
+            long totalPages = 0;
+            long totalItems = 0;
+            string url = Request.Url.AbsolutePath + "?1=1";
+            strWhere += " order by Status asc, CreationDate DESC";
+            var itemList = txABll.GetListPaging(strWhere, pageIndex, itemsPrePage, out totalPages, out totalItems);
+            viewModel.page = new Pager() { RecordAllCount = (int)totalItems, PageIndex = (int)pageIndex, PageAllCount = (int)totalPages, PageUrl = url };
+
+            #endregion
+
+            itemList.ForEach((p) =>
+            {
+                ShopDetail shopDE = shopDBll.GetModelByOpenId(p.OpenId);
+
+                TxAccountVM item = new TxAccountVM()
+                {
+                    ID = p.ID,
+                    OrderNo = p.OrderNo,
+                    OpenId = p.OpenId,
+                    Amount = p.Amount,
+                    IsCheced = p.Status == (int)TXOrderStatus.Checked ? true : false,
+                    Status = p.Status == (int)TXOrderStatus.Checked ? "已审核" : "未审核",
+                    Address = shopDE.Address,
+                    Contacts = shopDE.Contacts,
+                    Mobile = shopDE.Mobile,
+                    CreationTime = Utility.DTDefaultFormat(p.CreationDate)
+                };
+                viewModel.itemList.Add(item);
+            });
+
+            return View(viewModel);
+        }
+
+        #endregion
+
         /// <summary>
         /// 提现订单
         /// </summary>
